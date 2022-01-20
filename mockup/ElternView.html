@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+
+<!--  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+//-->
+
+<!--  <title>CodePen - Responsive Tables using LI</title>   //-->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  
+  
+<style>
+body {
+  font-family: "lato", sans-serif;
+}
+
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+}
+h2 small {
+  font-size: 0.5em;
+}
+
+.responsive-table li {
+  border-radius: 3px;
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.responsive-table .table-header {
+  background-color: #95A5A6;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.responsive-table .table-row {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+.responsive-table .col-1 {
+  flex-basis: 10%;
+}
+.responsive-table .col-2 {
+  flex-basis: 20%;
+}
+.responsive-table .col-3 {
+  flex-basis: 20%;
+}
+.responsive-table .col-4 {
+  flex-basis: 25%;
+}
+.responsive-table .col-5 {
+  flex-basis: 25%;
+}
+.responsive-table .col-whole {
+  flex-basis: 100%;
+  text-align: center;
+}
+@media all and (max-width: 767px) {
+  .responsive-table .table-header {
+    display: none;
+  }
+  .responsive-table li {
+    display: block;
+  }
+  .responsive-table .col {
+    flex-basis: 100%;
+  }
+  .responsive-table .col {
+    display: flex;
+    padding: 10px 0;
+  }
+  .responsive-table .col:before {
+    color: #6C7A89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: right;
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+  <div class="container">
+  <p>FSW-Logo<img src="" height="0" width="100"></img>Arbeitsstundennachweis Schuljahr 2021/2022</p>
+  <h2>FSW-Elternzeit - Elternansicht</h2>
+  <p align="center">Familie: <b>Meier / Hampel</b><img src="" height="0" width="100"></img> Alleinerziehend (20h):  <input size="5" type="text" id="single" name="single" value="nein" readonly disabled></p>
+  <br>
+  <p>(Erläuterungen und Ausfüllhinweise siehe <a href="">unten</a>)</p>
+  <br>
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1">Nummer</div>
+      <div class="col col-2">Datum</div>
+      <div class="col col-3">Stunden</div>
+      <div class="col col-4">Verabredete T&auml;tigkeit</div>
+      <div class="col col-5">Im Auftrag bzw. Rahmen der Arbeitsgruppe</div>
+    </li>
+    <li class="table-row">
+      <div class="col col-1" data-label="Nummer">1</div>
+      <div class="col col-2" data-label="Datum">03.10.2021</div>
+      <div class="col col-3" data-label="Stunden">
+            <select id="h" name="h">
+              <option value="0,5">0.5 h</option>
+              <option value="1,0">1.0 h</option>
+              <option value="1,5">1,5 h</option>
+              <option value="2,0">2,0 h</option>
+              <option value="...">...</option>
+            </select>
+      </div>
+      <div class="col col-4" data-label="Action"><textarea name="Text1" cols="25" rows="3">Schachbrett & -figuren geputzt</textarea></div>
+      <div class="col col-5" data-label="AG">
+            <select id="h" name="h">
+              <option value="0" selected>AK Haus und Garten</option>
+              <option value="1">AK Hauswirtschaft</option>
+              <option value="2">AK Material</option>
+              <option value="3">AK Öffentlichkeitsarbeit</option>
+              <option value="...">...</option>
+            </select>
+      </div>
+    </li>
+     <li class="table-row">
+      <div class="col col-1" data-label="Nummer">2</div>
+      <div class="col col-2" data-label="Datum">15.10.2021</div>
+      <div class="col col-3" data-label="Stunden">
+            <select id="h" name="h">
+              <option value="0,5">0.5 h</option>
+              <option value="1,0" selected>1.0 h</option>
+              <option value="1,5">1,5 h</option>
+              <option value="2,0">2,0 h</option>
+              <option value="...">...</option>
+            </select>
+      </div>
+      <div class="col col-4" data-label="Action"><textarea name="Text1" cols="25" rows="3">Eichi Regal entstaubt</textarea></div>
+      <div class="col col-5" data-label="AG">
+            <select id="h" name="h">
+              <option value="0">AK Haus und Garten</option>
+              <option value="1">AK Hauswirtschaft</option>
+              <option value="2">AK Material</option>
+              <option value="3" selected>AK Öffentlichkeitsarbeit</option>
+              <option value="...">...</option>
+            </select>
+      </div>
+    </li>
+    <li class="table-row">
+      <div class="col col-1" data-label="Nummer">3</div>
+      <div class="col col-2" data-label="Datum">10.12.2021</div>
+      <div class="col col-3" data-label="Stunden">
+            <select id="h" name="h">
+              <option value="0,5">0.5 h</option>
+              <option value="1,0">1.0 h</option>
+              <option value="1,5">1,5 h</option>
+              <option value="2,0" selected>2,0 h</option>
+              <option value="...">...</option>
+            </select>
+      </div>
+      <div class="col col-4" data-label="Action"><textarea name="Text1" cols="25" rows="3">Klavier gestimmt</textarea></div>
+      <div class="col col-5" data-label="AG">
+            <select id="h" name="h">
+              <option value="0">AK Haus und Garten</option>
+              <option value="1">AK Hauswirtschaft</option>
+              <option value="2" selected>AK Material</option>
+              <option value="3">AK Öffentlichkeitsarbeit</option>
+              <option value="...">...</option>
+            </select>
+      </div>
+    </li>
+    <li class="table-row">
+      <div class="col col-whole" data-label="newLine"><a href="">neue Zeile einfügen</a></div>
+    </li>
+    <li class="table-header">
+        <div class="col col-1">Summe Stunden: </div>
+        <div class="col col-2"></div>
+        <div class="col col-3">xx,x / 40 (bzw 20)</div>
+        <div class="col col-4"></div>
+        <div class="col col-5"></div>
+    </li>
+  </ul>
+</div>
+  
+  
+  
+  
+
+</body>
+
+</html>
+ 

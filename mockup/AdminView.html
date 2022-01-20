@@ -1,0 +1,173 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+
+
+<!--  <title>CodePen - Responsive Tables using LI</title>   //-->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  
+  
+<style>
+body {
+  font-family: "lato", sans-serif;
+}
+
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+}
+h2 small {
+  font-size: 0.5em;
+}
+
+.responsive-table li {
+  border-radius: 3px;
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.responsive-table .table-header {
+  background-color: #FFB6C1;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.responsive-table .table-row {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+.responsive-table .col-1 {
+  flex-basis: 10%;
+}
+.responsive-table .col-2 {
+  flex-basis: 15%;
+}
+.responsive-table .col-3 {
+  flex-basis: 25%;
+}
+.responsive-table .col-4 {
+  flex-basis: 15%;
+}
+.responsive-table .col-5 {
+  flex-basis: 25%;
+}
+.responsive-table .col-6 {
+  flex-basis: 25%;
+}
+.responsive-table .col-7 {
+  flex-basis: 15%;
+}
+.responsive-table .col-8 {
+  flex-basis: 25%;
+}
+.responsive-table .col-9 {
+  flex-basis: 10%;
+}
+.responsive-table .col-whole {
+  flex-basis: 100%;
+  text-align: center;
+}
+@media all and (max-width: 767px) {
+  .responsive-table .table-header {
+    display: none;
+  }
+  .responsive-table li {
+    display: block;
+  }
+  .responsive-table .col {
+    flex-basis: 100%;
+  }
+  .responsive-table .col {
+    display: flex;
+    padding: 10px 0;
+  }
+  .responsive-table .col:before {
+    color: #6C7A89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: right;
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+  <div class="container">
+  <p>FSW-Logo<img src="" height="0" width="100">Arbeitsstundennachweis Schuljahr 2021/2022</p>
+  <h2>FSW-Elternzeit - Adminansicht</h2>
+  <br>
+  <p>(Erläuterungen und Ausfüllhinweise siehe <a href="">unten</a>)</p>
+  <br>
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1">ID Familie</div>
+      <div class="col col-2">Name</div>      
+      <div class="col col-3">CryptoId</div>
+      <div class="col col-4">Allein-erziehend</div>
+      <div class="col col-5">E-Mail 1</div>
+      <div class="col col-6">E-Mail 2</div>
+      <div class="col col-7">bisher geleistete Stunden</div>
+      <div class="col col-8">letzte Eingabe</div>
+      <div class="col col-9"></div>
+    </li>
+    <li class="table-row">
+      <div class="col col-1" data-label="ID_Fam">1</div>
+      <div class="col col-2" data-label="FamNam">Schultze</div>      
+      <div class="col col-3" data-label="CryptoID">j7gdMH95hu7CZLss</div>
+      <div class="col col-4" data-label="Single"><input type="checkbox" id="single" name="single" checked></div>
+      <div class="col col-5" data-label="Mail_1">name@mail.de</div>
+      <div class="col col-6" data-label="Mail_2">-</div>
+      <div class="col col-7">16</div>
+      <div class="col col-8">24.01.2022 (14:29)</div>
+      <div class="col col-9">
+        <button type="button" style="background-color:red">Zeile löschen!</button>
+        <button type="button" style="background-color:green">Erinnerungs-Mail senden</button>
+        </div>
+    </li>
+    
+    <li class="table-row">
+      <div class="col col-whole" data-label="newLine"><a href="">neue Zeile einfügen</a></div>
+    </li>    
+  </ul>
+</div>
+  
+  
+  
+  
+
+</body>
+
+</html>
+ 
