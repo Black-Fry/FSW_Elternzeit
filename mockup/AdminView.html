@@ -53,6 +53,9 @@ h2 small {
   background-color: #ffffff;
   box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
 }
+.responsive-table .col-0 {
+  flex-basis: 5%;
+}
 .responsive-table .col-1 {
   flex-basis: 10%;
 }
@@ -77,9 +80,7 @@ h2 small {
 .responsive-table .col-8 {
   flex-basis: 25%;
 }
-.responsive-table .col-9 {
-  flex-basis: 10%;
-}
+
 .responsive-table .col-whole {
   flex-basis: 100%;
   text-align: center;
@@ -132,35 +133,33 @@ h2 small {
   <br>
   <ul class="responsive-table">
     <li class="table-header">
+      <div class="col col-0"></div>
       <div class="col col-1">ID Familie</div>
       <div class="col col-2">Name</div>      
-      <div class="col col-3">CryptoId</div>
+      <!--<div class="col col-3">CryptoId</div>//-->
       <div class="col col-4">Allein-erziehend</div>
       <div class="col col-5">E-Mail 1</div>
       <div class="col col-6">E-Mail 2</div>
       <div class="col col-7">bisher geleistete Stunden</div>
       <div class="col col-8">letzte Eingabe</div>
-      <div class="col col-9"></div>
     </li>
     <li class="table-row">
+      <div class="col col-0" data-label=""><input type="checkbox" id="check" name="check" ></div>
       <div class="col col-1" data-label="ID_Fam">1</div>
       <div class="col col-2" data-label="FamNam">Schultze</div>      
-      <div class="col col-3" data-label="CryptoID">j7gdMH95hu7CZLss</div>
+      <!--<div class="col col-3" data-label="CryptoID">j7gdMH95hu7CZLss</div>//-->
       <div class="col col-4" data-label="Single"><input type="checkbox" id="single" name="single" checked></div>
       <div class="col col-5" data-label="Mail_1">name@mail.de</div>
       <div class="col col-6" data-label="Mail_2">-</div>
       <div class="col col-7">16</div>
       <div class="col col-8">24.01.2022 (14:29)</div>
-      <div class="col col-9">
-        <button type="button" style="background-color:red">Zeile löschen!</button>
-        <button type="button" style="background-color:green">Erinnerungs-Mail senden</button>
-        </div>
-    </li>
-    
+    </li>  
     <li class="table-row">
       <div class="col col-whole" data-label="newLine"><a href="">neue Zeile einfügen</a></div>
     </li>    
   </ul>
+    <button type="button" style="background-color:red">Markierte Zeilen löschen!</button>
+    <button type="button" style="background-color:lightgreen">Erinnerungs-Mail an markierte Familien senden</button>
 </div>
   
   
