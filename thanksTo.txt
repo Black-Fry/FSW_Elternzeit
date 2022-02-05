@@ -1,0 +1,14 @@
+//db-class
+https://github.com/kolodny/Db.class.php
+
+//js table sort by name
+https://www.w3schools.com/howto/howto_js_filter_table.asp
+
+//make table sortierbar
+https://www.j-berkemeier.de/TableSort.html
+
+//glowing input field
+https://www.w3docs.com/snippets/css/how-to-create-a-glowing-border-around-an-input-field.html
+
+//toggle switch
+https://www.w3schools.com/howto/howto_css_switch.asp

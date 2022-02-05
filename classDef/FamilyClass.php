@@ -64,7 +64,25 @@ class FamilyClass
     
     function returnGeleisteteStunden ()
     {   return $this->geleisteteStunden;    }
+       
+    function getIsPensumErfuellt ()
+    {
+        $pensum =   0;
         
+        //weise zu erledigendes Pensum entspr allein/gemeinsam Sorgerecht zu
+        if ($this->isSingle() )
+        {   $pensum =   PENSUM_SORGERECHT_ALLEIN;       }
+        else
+        {   $pensum =   PENSUM_SORGERECHT_GEMEINSAM;    }
+                    
+        $pensum     =   $pensum -   $this->returnGeleisteteStunden ();
+        
+        //wenn 0: vermeide Darstellung "- 0 h"
+        if ($pensum != 0)   {   $pensum =   $pensum * -1;   }
+        
+        return $pensum;
+    }
+    
     function getFamID ()
     {   return $this->FamID;    }
     

@@ -1,0 +1,183 @@
+<?php
+
+include './FamilyClass.php';
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
+ */
+
+/**
+ * Description of FamClass
+ *
+ * @author Micha
+ */
+class HTMLTableClass_withoutInherit
+{
+    var $view;      //user or admin
+    var $htmlString;
+
+    /* constructor. creates table for both viewd (admin or user) 
+        param 
+     *      */
+    function HTMLTableClass ($_view)
+    {		
+        $this->view =   $_view;
+        $this->initTable();
+    }  
+
+    public function initTable ()
+    {
+        $this->htmlString   =   "";
+        $this->htmlString   .=   '<table id="adminTable" width="90%" class="sortierbar">';
+        
+        $this->createHeader();
+    }
+    
+    public function createHeader ()
+    {
+        $this->htmlString   .=  '<thead>'
+                            .       '<tr class="header">';
+        
+        switch($this->view)
+        {
+            case ADMIN_VIEW:
+                $this->htmlString   .=  
+                    '   <th></th>
+                        <!--<div class="col col-1">ID Familie</div>//-->
+                        <th class="vorsortiert">Name</th>
+                        <!--<div class="col col-3">CryptoId</div>//-->
+                        <th>Alleinerziehend</th>
+                        <th>E-Mail 1</th>
+                        <th>E-Mail 2</th>
+                        <th class="sortierbar">bisher geleistete Stunden</th>
+                        <th class="sortierbar">Pensum erfüllt</th>
+                        <th class="sortierbar">letzte Eingabe</th>';
+                break;
+            case USER_VIEW:
+                    '   <div class="col col-1">Nummer</div>
+                        <div class="col col-2">Datum</div>
+                        <div class="col col-3">Stunden</div>
+                        <div class="col col-4">Verabredete T&auml;tigkeit</div>
+                        <div class="col col-5">Im Auftrag bzw. Rahmen der Arbeitsgruppe</div>';
+                break;
+            default:
+        }
+        
+        $this->htmlString   .=      "</tr>"
+                            .   "</thead>"
+                            .   "<tbody>";
+    }
+    
+    function finishTable ()
+    {
+        $this->htmlString   .=  '</table>';
+    }
+    
+    function returnHTML ()
+    {   
+        $this->finishTable();
+        return $this->htmlString;   
+    }
+
+    /* adds row to existing table
+     *  param _view: decides whether user or admin table shall be created & populated
+     *  param _valueObj is either of FamilyClass (admin-View) or EinsatzClass (user-View)
+     */
+    function addRow ($_valueObj)
+    {
+        $pensum;
+        $jsID = $_valueObj->getFamID();
+        //echo $jsID;
+        $this->htmlString   .=     '<tr>';
+       
+        switch($this->view)
+        {
+            case ADMIN_VIEW:
+                //hidden td um js-Suchalgorithmus �ber Name & MailAdressen zu nutzen
+                $this->htmlString   .=  '<td style="display:none;">' . $_valueObj->getFamNam() . ' ' . $_valueObj->getFamMail(1) . ' ' . $_valueObj->getFamMail(2) . '</td>';
+                
+                $this->htmlString   .=  '<td>'
+                                    .   '   <input type="checkbox" id="check_' . $jsID . '" name="check_' . $jsID . '" >'
+                                    .   '</td>';
+                //<div class="col col-1" data-label="ID_Fam">1</div>
+                $this->htmlString   .=  '<td>'
+                                    .   '   <input type="text" id="FamNamID_' . $jsID . '" name="FamNamID_' . $jsID . '" size="10" value="' . $_valueObj->getFamNam() . '">'
+                                    .   '</td>';
+                //<div class="col col-3" data-label="CryptoID">j7gdMH95hu7CZLss</div>
+                $this->htmlString   .=  '<td align="center">'
+                                    .       '<label class="switch">
+                                                <input type="checkbox" id="single_' . $jsID . ' name="single_' . $jsID;
+                //aktiviere Checkbox, wenn FamObj == alleinerziehend
+                if ($_valueObj->isSingle() )
+                {   $this->htmlString .=  ' checked'; }
+                $this->htmlString   .=  ' disabled><span class="slider"></span>'
+                                    .   '</label></td>';
+                
+                $this->htmlString   .=  '<td>'
+                                    .   '   <input type="text" id="FamMailOne_' . $jsID . '" name="FamMailOne_' . $jsID . '" size="15" value="' . $_valueObj->getFamMail(1) . '">'
+                                    .   '</td>';
+                $this->htmlString   .=  '<td>'
+                                    .   '   <input type="text" id="FamMailTwo_' . $jsID . '" name="FamMailTwo_' . $jsID . '" size="15" value="' . $_valueObj->getFamMail(2) . '">'
+                                    .   '</td>';
+                $this->htmlString   .=  '<td>'
+                                    //.   '<p align="center" id="geleisteteStunden_' . $jsID . '" name="geleisteteStunden_' . $jsID . '">' . $_valueObj->returnGeleisteteStunden () . '</p>'
+                                    .   '   <a href="' . ROOT_URL . '/views/user.php?cryurl=' . $_valueObj->getCryptoSecret() . '" target="_blank">' . $_valueObj->returnGeleisteteStunden () . '</a>'
+                                    .   '</td>';
+                
+                $this->htmlString   .=   '<td ';
+                
+                    $pensum =   $_valueObj->getIsPensumErfuellt ();
+                    
+                    //sind noch h abzusolvieren? (bg = rot, #ff9966)! Sonst bg = gruen, #D6EEEE
+                    if ( 0 > $pensum )
+                    {   $this->htmlString     .=   'bgcolor="#ff9966"';   }            
+                    else
+                    {   $this->htmlString     .=   'bgcolor="#D6EEEE"';  }
+        
+                    $this->htmlString     .=      '><p>' . $pensum . ' h</p>'
+                                    .   '</td>';
+                
+                $this->htmlString   .=  '<td>'
+                                    .   '   <p>' . $_valueObj->getLastUserEdit() . '</p>'
+                                    .   '</td>';
+                break;
+            case USER_VIEW:
+                break;
+            default:
+        }
+   
+        $this->htmlString   .=      '</tr>';
+
+    }
+   
+    
+    function addFinalRow ()
+    {      
+        switch($this->view)
+        {
+            case ADMIN_VIEW:
+                    $this->htmlString   .=  '</tbody>'
+                                        .   '<tfoot>'
+                                        .       '<tr>'
+                                        .           '<td></td>'
+                                        .           '<td></td>'
+                                        .           '<td></td>'
+                                        .           '<td></td>'
+                                        .           '<td align="center">'
+                                        .               '<input type="button" onClick="bgQuery(\'' . "INSERT" . '\', ' . ENCODED_T_FAM . ', 0, 0, 0)" value="Eine neue Zeile einfügen"/>'
+                                        .           '</td>'
+                                        .           '<td></td>'
+                                        .           '<td></td>'
+                                        .           '<td></td>'
+                                        .       '</tr>'
+                                        .   '</tfoot>';
+                break;
+            case USER_VIEW:
+                break;
+            default:
+        }
+    }
+            
+    
+}
