@@ -39,6 +39,7 @@ echo ('<!DOCTYPE html>
         <html lang="de">
             <head>
                 <meta charset="UTF-8">
+                <link rel="icon" href="../img/fswFavIcon.png" sizes="32x32" />
                 
                 <!--  <title>CodePen - Responsive Tables using LI</title>   //-->
                 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -67,9 +68,6 @@ readFamiliesFromDB($adminHTMLTab);
 echo $adminHTMLTab->returnHTML();
 //$adminHTMLTab->echoWhoAmI();
 
-//button js test
-echo ('<button onclick="bgQuery()">Click me</button>');
-       
 // html page finals
 echo ('     </body>
         </html>');

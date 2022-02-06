@@ -87,8 +87,12 @@ class HTMLAdminTableClass extends HTMLTableClass
         //hidden td um js-Suchalgorithmus �ber Name & MailAdressen zu nutzen
         $this->htmlString   .=  '<td style="display:none;">' . $_valueObj->getFamNam() . ' ' . $_valueObj->getFamMail(1) . ' ' . $_valueObj->getFamMail(2) . '</td>';
 
+        /*
+         * zusammengesetzte id (name, jsid, geleistete stunden) hilft beim callBgQueries() um Zeilen zu entscheiden 
+         *  welche Zeilen gelöscht werden dürfen auf Buton-Druck (nur wenn gelStunden != 0)
+         */
         $this->htmlString   .=  '<td>'
-                            .   '   <input type="checkbox" id="check_' . $jsID . '" name="check_' . $jsID . '" >'
+                            .   '   <input type="checkbox" id="check_' . $jsID . '_' . $_valueObj->returnGeleisteteStunden() .' " name="check_' . $jsID . '" >'
                             .   '</td>';
         //<div class="col col-1" data-label="ID_Fam">1</div>
         $this->htmlString   .=  '<td>'
@@ -144,11 +148,15 @@ class HTMLAdminTableClass extends HTMLTableClass
             .           '<td></td>'
             .           '<td></td>'
             .           '<td></td>'
-            .           '<td></td>'
+            .           '<td align="center">'
+            .               '<input type="button" onClick="bgQuery(\'' . "DELETE" . '\', ' . ENCODED_T_FAM . ', 0, 0, 0)" value="Markierte Zeilen löschen"/>'
+            .           '</td>'
             .           '<td align="center">'
             .               '<input type="button" onClick="bgQuery(\'' . "INSERT" . '\', ' . ENCODED_T_FAM . ', 0, 0, 0)" value="Eine neue Zeile einfügen"/>'
             .           '</td>'
-            .           '<td></td>'
+            .           '<td align="center">'
+            .               '<input type="button" value="Erinnerungsmail an alle markierten senden"/>'
+            .           '</td>'
             .           '<td></td>'
             .           '<td></td>'
             .       '</tr>'

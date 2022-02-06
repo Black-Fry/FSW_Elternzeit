@@ -12,18 +12,30 @@ function generateUpdateStatement ($_tabNam, $_fieldToBeUpdated, $_newValue, $_id
    return $sql;
 }
 
-function generateInsertStatement ($_tabNam)
+function generateInsertStatement ($_cryptoTabNam)
 {
-    $sql    =   "INSERT INTO " . $_tabNam . " "
+    $tabNam = getRealTabNam ($_cryptoTabNam);
+    
+    $sql    =   "INSERT INTO " . $tabNam . " "
             . "(`" . F_FAM_ID. "`, `" . F_FAM_NAM . "`, `" . F_FAM_CRYPTURL . "`, `" . F_FAM_SINGLE . "`, `" . F_FAM_MAIL_ONE . "`, `" . F_FAM_MAIL_TWO . "`) "
-            . " VALUES (NULL, NULL, \"" . generateRandomString(16) . "\", '0', NULL, NULL);";
+            . " VALUES (NULL, NULL, \"" . generateRandomString() . "\", '0', NULL, NULL);";
     
     return $sql;
 }
 
-function generateRandomString($length) 
+function generateDeleteStatement ($_cryptoTabNam, $_idToBeDeleted)
 {
-    return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+    $tabNam = getRealTabNam($_cryptoTabNam);
+    
+    //"DELETE FROM `Tab_Familien` WHERE `Tab_Familien`.`FamID` = 28"
+    $sql    =   "DELETE FROM " . $tabNam . " WHERE " . getRealIdFieldNam ($tabNam) . "=" . $_idToBeDeleted . ";";
+    
+    return $sql;
+}
+
+function generateRandomString() 
+{
+    return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(URL_SECRET_LENGTH/strlen($x)) )),1,URL_SECRET_LENGTH);
 }
     
 /* funktion löst tabellenname in wirklich sql-tabellennamen auf
@@ -100,11 +112,25 @@ if( !isset($aResult['error']) )
            {    $aResult['error'] = 'Error in arguments!';  }
            else 
            {
-                $tabNam             = getRealTabNam ($_POST['arguments'][0]);
-                $sql                = generateInsertStatement($tabNam);
+                $sql                = generateInsertStatement($_POST['arguments'][0]);
                 //DBClass::connect();
                 $aResult['result']  = $sql . " |INSERT| ";
                 $aResult['result']  .= DBclass::query($sql)->all();   
+           }
+           break;
+        case 'DELETE':
+           if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 2) ) 
+           {    $aResult['error'] = 'Error in arguments!';  }
+           else 
+           {
+                $idsToBeDeleted     =   json_decode($_POST['arguments'][3]);
+                 //DBClass::connect();
+                foreach ($idsToBeDeleted as $singleIdToBeDeleted)
+                {
+                    $sql                = generateDeleteStatement($_POST['arguments'][0], $singleIdToBeDeleted);
+                    //$aResult['result']  = $sql . " |DELETE| ";
+                    $aResult['result']  .= DBclass::query($sql)->all();   
+                }
            }
            break;
         case 'UPDATE':
