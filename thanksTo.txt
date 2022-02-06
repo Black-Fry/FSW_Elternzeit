@@ -12,3 +12,6 @@ https://www.w3docs.com/snippets/css/how-to-create-a-glowing-border-around-an-inp
 
 //toggle switch
 https://www.w3schools.com/howto/howto_css_switch.asp
+
+//snackbar
+https://www.w3schools.com/howto/howto_js_snackbar.asp

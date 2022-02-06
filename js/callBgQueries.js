@@ -34,6 +34,14 @@ function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
     if ( _sqlCmd === 'DELETE') 
     {  _id =   JSON.stringify(gatherAllCheckedRows()); }
     
+    // lies wert des upgedateten Text-Inputs. param '_newValue' transportiert id, mit derne Hilfe
+    //  per js/DOM der aktuelle wert ausgelesen werden kann
+    if ( _sqlCmd === 'UPDATE') 
+    {         
+        //get value from dom
+        _newValue   = document.getElementById(_newValue.name).value;
+    }
+    
     //alert (_sqlCmd + ", " + _cryptoTab + ", " +  _fieldnam + ", " +  _newValue + ", " + _id);
     
     jQuery.ajax(
@@ -50,8 +58,22 @@ function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
         {
             if( !('error' in obj) ) 
             {   
-                //show "success within toast;
                 console.log(obj.result);
+                
+                //show "success within toast;
+                if ( _sqlCmd === 'UPDATE' )
+                {   
+                    // Get the snackbar DIV
+                    var x = document.getElementById("snackbar");
+
+                    // Add the "show" class to DIV
+                    x.className = "show";
+
+                    // After 3 seconds, remove the show class from DIV
+                    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                }               
+                
+                //reload page
                 if ( (_sqlCmd === 'INSERT') || (_sqlCmd === 'DELETE') )
                 {   
                     var url = "http://fsw.ossoelmi.berlin/views/admin.php";

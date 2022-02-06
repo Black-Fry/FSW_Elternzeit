@@ -48,6 +48,7 @@ echo ('<!DOCTYPE html>
                 <link rel="stylesheet" href="../styles/adminViewTable.css">
                 <link rel="stylesheet" href="../styles/inputGlow.css">
                 <link rel="stylesheet" href="../styles/toggleSwitch.css">
+                <link rel="stylesheet" href="../styles/snackbar.css">
                 <script src="../js/FilterTableByName.js"></script>
                 <script src="../js/tableSort.js"></script>
                 <script src="../js/callBgQueries.js"></script>
@@ -67,6 +68,9 @@ readFamiliesFromDB($adminHTMLTab);
 
 echo $adminHTMLTab->returnHTML();
 //$adminHTMLTab->echoWhoAmI();
+
+//wird nur eingebelndet, wenn ein teXtfeld eine Änderung erfahren und anschließend das Feld den Fokus verloren hat
+echo ('<div id="snackbar">Änderung gespeichert!</div>');
 
 // html page finals
 echo ('     </body>

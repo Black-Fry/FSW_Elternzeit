@@ -4,10 +4,12 @@
 
 include '../classDef/DBclass.php';
 
-function generateUpdateStatement ($_tabNam, $_fieldToBeUpdated, $_newValue, $_id)
+function generateUpdateStatement ($_cryptoTabNam, $_fieldToBeUpdated, $_newValue, $_id)
 {
-    $sql    =   "UPDATE " . $_tabNam . " SET `" . $_fieldToBeUpdated . "` = '" . $_newValue
-            . "' WHERE `" . getRealIdFieldNam ($_tabNam) . "` = " . $_id . ";";
+    $tabNam = getRealTabNam($_cryptoTabNam);
+    
+    $sql    =   "UPDATE " . $tabNam . " SET `" . $_fieldToBeUpdated . "` = '" . $_newValue
+            . "' WHERE `" . getRealIdFieldNam ($tabNam) . "` = " . $_id . ";";
    
    return $sql;
 }
@@ -138,9 +140,7 @@ if( !isset($aResult['error']) )
            {    $aResult['error'] = 'Error in arguments!';  }
            else 
            {
-                $tabNam             =   getRealTabNam ($_POST['arguments'][0]);
-                //$sql    =   generateUpdate($tabNam, $field, $value, $id);
-                $sql                =   generateUpdateStatement($tabNam, $_POST['arguments'][1], $_POST['arguments'][2], $_POST['arguments'][3]);
+                $sql                =   generateUpdateStatement($_POST['arguments'][0], $_POST['arguments'][1], $_POST['arguments'][2], $_POST['arguments'][3]);
                 //DBClass::connect();
                 $aResult['result']  = $sql . " |UPDATE| ";
                 $aResult['result']  .= DBclass::query($sql)->all();   

@@ -96,7 +96,7 @@ class HTMLAdminTableClass extends HTMLTableClass
                             .   '</td>';
         //<div class="col col-1" data-label="ID_Fam">1</div>
         $this->htmlString   .=  '<td>'
-                            .   '   <input type="text" id="FamNamID_' . $jsID . '" name="FamNamID_' . $jsID . '" size="10" value="' . $_valueObj->getFamNam() . '">'
+                            .   '   <input type="text" id="FamNamID_' . $jsID . '" name="FamNamID_' . $jsID . '" size="10" value="' . $_valueObj->getFamNam() . '" onchange="bgQuery(\'' . "UPDATE" . '\', ' . ENCODED_T_FAM . ', \'' . F_FAM_NAM . '\', this, ' . $jsID . ')">'
                             .   '</td>';
         //<div class="col col-3" data-label="CryptoID">j7gdMH95hu7CZLss</div>
         $this->htmlString   .=  '<td align="center">'
@@ -109,10 +109,10 @@ class HTMLAdminTableClass extends HTMLTableClass
                             .   '</label></td>';
 
         $this->htmlString   .=  '<td>'
-                            .   '   <input type="text" id="FamMailOne_' . $jsID . '" name="FamMailOne_' . $jsID . '" size="15" value="' . $_valueObj->getFamMail(1) . '">'
+                            .   '   <input type="text" id="FamMailOne_' . $jsID . '" name="FamMailOne_' . $jsID . '" size="15" value="' . $_valueObj->getFamMail(1) . '" onchange="bgQuery(\'' . "UPDATE" . '\', ' . ENCODED_T_FAM . ', \'' . F_FAM_MAIL_ONE . '\', this, ' . $jsID . ')">'
                             .   '</td>';
         $this->htmlString   .=  '<td>'
-                            .   '   <input type="text" id="FamMailTwo_' . $jsID . '" name="FamMailTwo_' . $jsID . '" size="15" value="' . $_valueObj->getFamMail(2) . '">'
+                            .   '   <input type="text" id="FamMailTwo_' . $jsID . '" name="FamMailTwo_' . $jsID . '" size="15" value="' . $_valueObj->getFamMail(2) . '" onchange="bgQuery(\'' . "UPDATE" . '\', ' . ENCODED_T_FAM . ', \'' . F_FAM_MAIL_TWO . '\', this, ' . $jsID . ')">'
                             .   '</td>';
         $this->htmlString   .=  '<td>'
                             //.   '<p align="center" id="geleisteteStunden_' . $jsID . '" name="geleisteteStunden_' . $jsID . '">' . $_valueObj->returnGeleisteteStunden () . '</p>'
