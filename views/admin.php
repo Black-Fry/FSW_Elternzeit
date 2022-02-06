@@ -3,6 +3,7 @@
 include '../classDef/DBclass.php';
 include '../classDef/FamilyClass.php';
 include '../classDef/HTMLAdminTableClass.php';
+include_once '../db_access/connection_helper.php';
 
 
 
@@ -31,8 +32,15 @@ function readFamiliesFromDB($htmlTableObj)
 
 //------------------------ Funktionsaufrufe
 
+session_start();    /* MUSS AUF ALLEN SEITEN STEHEN - UEBERALL ALS ERSTER BEFEHL !! */
+$loginResult    = logged_in();
+debug_to_console($loginResult);
+if (! $loginResult) 
+{   header('Location: ' . ADMIN_LOGIN_URL); }
+
 //do not use any js/css files from cache.
 session_cache_limiter('nocache');
+
 
 //html page inits
 echo ('<!DOCTYPE html>

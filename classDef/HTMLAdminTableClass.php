@@ -155,7 +155,7 @@ class HTMLAdminTableClass extends HTMLTableClass
             .               '<input type="button" onClick="bgQuery(\'' . "INSERT" . '\', ' . ENCODED_T_FAM . ', 0, 0, 0)" value="Eine neue Zeile einfügen"/>'
             .           '</td>'
             .           '<td align="center">'
-            .               '<input type="button" value="Erinnerungsmail an alle markierten senden"/>'
+            .               '<input type="button" onclick=" window.open(\'../mockup/MailTemplate.htm\',\'_blank\')" value="Erinnerungsmail an alle markierten senden"/>'
             .           '</td>'
             .           '<td></td>'
             .           '<td></td>'
