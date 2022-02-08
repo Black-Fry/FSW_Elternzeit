@@ -2,14 +2,15 @@
 
 
 /*  define DB-Access data    */
-define ("DB_HOST", "");
-define ("DB_USERNAME", "");
-define ("DB_PASSWORD", "");
-define ("DB_NAME", "");
+define ("DB_HOST", "rdbms.strato.de");
+define ("DB_USERNAME", "dbu783084");
+define ("DB_PASSWORD", "65d01c3d97c81ef2");
+define ("DB_NAME", "dbs5269035");
 
 /*  SQL-Tab-Names    */	
 define ("T_FAM", "Tab_Familien");
 define ("T_EINSAETZE", "Tab_Einsaetze");
+define ("T_ADMIN_USER", "Tab_AdminUser");
 
 /* Dekodierte SQL-Tabellennamen - werden per JS in .onChange() ausgetauscht und sollen nicht im Klartext sichtbar sein */
 define ("ENCODED_T_FAM", 1);
@@ -24,6 +25,10 @@ define ("F_FAM_SINGLE", "Single");
 define ("F_FAM_MAIL_ONE", "FamMailOne");
 define ("F_FAM_MAIL_TWO", "FamMailTwo");
 define ("E_EINSATZ_ID", "EinsatzID");
+define ("U_USER_NAME", "UserName");
+define ("U_USER_PASS", "UserPass");
+define ("U_USER_SESSION", "UserSession");
+define ("U_USER_ID", "UserID");
 
 /*  HTML Table views    */
 define ("ADMIN_VIEW", "ADMIN");
@@ -34,10 +39,23 @@ define ("USER_VIEW", "USER");
 define ("ROOT_URL", "http://fsw.ossoelmi.berlin");
 define ("DB_ACCESS_URL", ROOT_URL . "/db_acess");
 define ("BG_QUERY_URL", DB_ACCESS_URL . "bgQueries.php");
+define ("ADMIN_LOGIN_URL", ROOT_URL . "/views/adminLogin.php");
+define ("ADMIN_URL", ROOT_URL . "/views/admin.php");
+define ("LOGOUT_URL", ROOT_URL . "/views/logout.php");
 
 /* Konstanten   */
 define ("PENSUM_SORGERECHT_ALLEIN", 20);
 define ("PENSUM_SORGERECHT_GEMEINSAM", 40);
 define ("URL_SECRET_LENGTH", 16);
+define ("ABGABEDATUM", "01. 01. 1971");
+
+function debug_to_console($data) 
+{
+    $output = $data;
+    if (is_array($output))
+    {    $output = implode(',', $output);   }
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
 
 ?>
