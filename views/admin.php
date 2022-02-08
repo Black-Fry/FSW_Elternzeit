@@ -34,7 +34,7 @@ function readFamiliesFromDB($htmlTableObj)
 
 session_start();    /* MUSS AUF ALLEN SEITEN STEHEN - UEBERALL ALS ERSTER BEFEHL !! */
 $loginResult    = logged_in();
-debug_to_console($loginResult);
+//print_r($loginResult);
 if (! $loginResult) 
 {   header('Location: ' . ADMIN_LOGIN_URL); }
 
@@ -60,10 +60,12 @@ echo ('<!DOCTYPE html>
                 <script src="../js/FilterTableByName.js"></script>
                 <script src="../js/tableSort.js"></script>
                 <script src="../js/callBgQueries.js"></script>
+                <script src="../js/tickAllCheckboxes.js"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             </head>
             <body translate="no" >');
 
+echo ('<div style="width:90%; text-align: right"><a href="' . LOGOUT_URL . '">Ausloggen</a></div>');
 
 //echo "<div>hi</div>";
 echo ('<div>'

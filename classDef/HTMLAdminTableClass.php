@@ -61,7 +61,7 @@ class HTMLAdminTableClass extends HTMLTableClass
                             .       '<tr class="header">';     
 
         $this->htmlString   .=  
-            '   <th></th>
+            '   <th><input type="checkbox" id="tickAll" name="tickAll" onclick = tickCheckBoxes() ></th>
                 <!--<div class="col col-1">ID Familie</div>//-->
                 <th class="vorsortiert">Name</th>
                 <!--<div class="col col-3">CryptoId</div>//-->
