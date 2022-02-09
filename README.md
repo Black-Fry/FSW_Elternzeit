@@ -10,7 +10,7 @@ Diese Ansicht ist nicht geschützt durch Benutzername & Passwort. Grund: Potenzi
 Die Ansicht ist geschützt durch ein individuelles 10+-stelliges Geheimnis in der URL, welches automatisch und zufällig beim Anlegen der User in der Datenbank generiert wird.
 
 ### Preview Useransicht:
-![image](https://user-images.githubusercontent.com/11231051/153256098-eff6c018-d7e5-44d3-b5d8-b2b584eb2189.png)
+![image](https://user-images.githubusercontent.com/11231051/153276649-2a6ddbae-3401-4799-bc02-dce046ed34ba.png)
 
 
 ## (2) Die Ansicht für das Sekretariat (=Admin)
