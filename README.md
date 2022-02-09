@@ -18,7 +18,7 @@ Diese Ansicht zeigt die Summen aller Elterneinsätze an. Hierüber können neue 
 Diese Ansicht ist geschützt durch Nutzername und Passwort.
 
 ### Preview Admin-Ansicht:
-![image](https://user-images.githubusercontent.com/11231051/153256699-99c3701d-1965-4c76-91c5-a0e12ea8e886.png)
+![image](https://user-images.githubusercontent.com/11231051/153259416-2b4a007b-7439-41a7-8956-1c5b066b6087.png)
 
 
 ## Während der Erstellung des Projektes sind diverse Quellen angezapft worden
