@@ -1,26 +1,3 @@
-//function is not in use
-function bgQuery_old() 
-{
-    //* http://fsw.ossoelmi.berlin/db_access/bgQueries.php?0=1&1=feld&2=test&3=0815&4=UPDATE    
-    //var str = "0=1&1=feld&2=test&3=0815&4=UPDATE";    //on bgCall & POST no "?" required?
-    var str = "?0=1&1=feld&2=test&3=0815&4=UPDATE";
-    //var url = "<?php echo BG_QUERY_URL; ?>";
-    var url = "http://fsw.ossoelmi.berlin/db_access/bgQueries.php"; //no ? required
-
-    xmlReq=new XMLHttpRequest();
-
-    xmlReq.open("POST",url,true);
-    xmlReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlReq.setRequestHeader("Content-length", str.length);
-    xmlReq.setRequestHeader("Connection", "close");
-    xmlReq.send(str);
-    console.log("done");
-    
-    window.open(url+str, '_blank').focus();
-    
-    alert(str);
-}
-
 //receive args: sql-cmd, cryptoTabNam, field2Bupdated, newValue, id
 function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
 {
@@ -37,9 +14,26 @@ function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
     // lies wert des upgedateten Text-Inputs. param '_newValue' transportiert id, mit derne Hilfe
     //  per js/DOM der aktuelle wert ausgelesen werden kann
     if ( _sqlCmd === 'UPDATE') 
-    {         
+    {   
         //get value from dom
-        _newValue   = document.getElementById(_newValue.name).value;
+
+        //aufruf kommt von element aus userview? dort muss "on"/"off" nach "1/0" ersetzt werden
+        if ("userViewSingle" === _newValue.name)
+        {
+            switch (document.getElementById(_newValue.name).checked)
+            {
+                case true:
+                    _newValue   =   '1';
+                    break;
+                case false:
+                    _newValue   =   "0";
+            }
+        }
+        //aufruf kommt aus admin view. kein translate noetig
+        else
+        {   _newValue   = document.getElementById(_newValue.name).value;    }
+        
+        
     }
     
     //alert (_sqlCmd + ", " + _cryptoTab + ", " +  _fieldnam + ", " +  _newValue + ", " + _id);

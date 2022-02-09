@@ -12,7 +12,7 @@ function filterByName()
   for (i = 0; i < tr.length; i++) 
   {      
     //[0] steht fuer das hidden td, siehe TableClass
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[8];
     if (td) 
     {
       txtValue = td.textContent || td.innerText;

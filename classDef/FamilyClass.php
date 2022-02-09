@@ -74,13 +74,13 @@ class FamilyClass
         {   $pensum =   PENSUM_SORGERECHT_ALLEIN;       }
         else
         {   $pensum =   PENSUM_SORGERECHT_GEMEINSAM;    }
-                    
-        $pensum     =   $pensum -   $this->returnGeleisteteStunden ();
+                           
+        return ( $pensum -   $this->returnGeleisteteStunden ()) ;
         
-        //wenn 0: vermeide Darstellung "- 0 h"
-        if ($pensum != 0)   {   $pensum =   $pensum * -1;   }
-        
-        return $pensum;
+        /*if ( 0 >= $pensum )
+        {   return 1;   }
+        else
+        {   return 0;   }*/
     }
     
     function getFamID ()

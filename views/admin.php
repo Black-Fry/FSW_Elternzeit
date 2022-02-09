@@ -2,7 +2,7 @@
 
 include '../classDef/DBclass.php';
 include '../classDef/FamilyClass.php';
-include '../classDef/HTMLAdminTableClass.php';
+include '../classDef/HTMLTableClass.php';
 include_once '../db_access/connection_helper.php';
 
 
