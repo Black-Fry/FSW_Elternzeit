@@ -28,7 +28,7 @@ function readEinsaetzeFromDB($htmlTableObj, $_famID)
         $einsatzObj = new EinsatzClass($einsatz);
                 
         //place content into param table - one row per famObj
-        $htmlTableObj->addRow($einsatzObj, $i);
+        $htmlTableObj->addRow($einsatzObj);
         $i++;
     }
 

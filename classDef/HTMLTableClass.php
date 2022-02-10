@@ -1,6 +1,8 @@
 <?php
 
 include './FamilyClass.php';
+include_once './EinsatzZweckClass.php';
+include_once './DBclass.php';
 
 
 /**
@@ -203,11 +205,11 @@ class HTMLUserTableClass extends HTMLTableClass
     public function createHeader ()
     {
         $this->htmlString   .=  '<li class="table-header">'
-            .   '   <div class="col col-1">Nummer<br><br>(<b>noch statisch</b>)</div>
+            .   '   <!--<div class="col col-1">Nummer<br><br>(<b>noch statisch</b>)</div>//-->
                     <div class="col col-2">Datum</div>
                     <div class="col col-3">Stunden</div>
                     <div class="col col-4">Verabredete T&auml;tigkeit</div>
-                    <div class="col col-5">Im Auftrag bzw. Rahmen der Arbeitsgruppe<br><br>(<b>noch statisch</b>)</div>';
+                    <div class="col col-5">Im Auftrag bzw. Rahmen der Arbeitsgruppe</div>';
     }
     
     //param wird benoetugt fuer einsatzobjekte
@@ -218,39 +220,45 @@ class HTMLUserTableClass extends HTMLTableClass
         $this->htmlString   .=     '<li class="table-row">';
         
         $this->htmlString   .=
-            '<div class="col col-1" data-label="Nummer"></div>
-             <div class="col col-2" data-label="Datum">' . $_valueObj->getEinsatzDate() . '</div>
-             <div class="col col-3" data-label="Stunden">';
+            '<!--<div class="col col-1" data-label="Nummer"></div>//-->
+             <div class="col col-2" data-label="Datum_"' . $einsatzID . '>' . $_valueObj->getEinsatzDate() . '</div>
+             <div class="col col-3" data-label="Stunden' . $einsatzID . '">';
         
-        $this->htmlString   .= $this->generateDropDown(10, 0.5, ("h' . $einsatzID"), $_valueObj->getLength());
+        $this->htmlString   .= $this->generateDropDown(range(0, 21, 0.5), ("h_" . $einsatzID), $_valueObj->getLength());
 
-        $this->htmlString   .=    '</div>
-             <div class="col col-4" data-label="Action"><textarea name="einsatzText_"' . $einsatzID . ' cols="25" rows="3">' . $_valueObj->getKommentar() . '</textarea></div>
-             <div class="col col-5" data-label="AG">
-                <select id="h" name="h">
-                    <option value="0" selected>AK Haus und Garten</option>
-                    <option value="1">AK Hauswirtschaft</option>
-                    <option value="2">AK Material</option>
-                    <option value="3">AK Öffentlichkeitsarbeit</option>
-                    <option value="...">...</option>
-                </select>
-             </div>';
+        $this->htmlString   .=    '</div>';
+        
+        $this->htmlString   .=
+             '<div class="col col-4" data-label="Action"><textarea name="einsatzText_' . $einsatzID . '" cols="25" rows="3">' . $_valueObj->getKommentar() . '</textarea></div>';
+
+        $this->htmlString   .=
+            '<div class="col col-5" data-label="AG_' . $einsatzID . '">';
+         
+            $einsatzZwecke      =   $this->readAllZweckeFromDB();
+            //echo $_valueObj->returnZweckNam();
+            $this->htmlString   .= $this->generateDropDown($einsatzZwecke, ("zweck_" . $einsatzID), $_valueObj->returnZweckNam());
+        
+        $this->htmlString   .=     '</div>';
         
         $this->htmlString   .=      '</li>';
     }
     
-    public function generateDropDown ($_range, $_steps, $_selectNam, $_selectedValue)
+
+    public function generateDropDown ($_array, $_selectNam, $_selectedValue)
     {        
         $html   =   '<select id="' . $_selectNam . '" name="' . $_selectNam . '">';
-        
-        for ($i=0; $i<$_range; $i=$i+$_steps )
+        //print_r($_array);
+        $i = 0;
+        foreach ($_array as $element)
         {   
-            $html   .= '<option value="' . $i . '"';
+            $html   .= '<option id="' . $i . '" value="' . $element . '"';
             
-            if ($_selectedValue ==  $i)
+            if ($_selectedValue ==  $element)
             {   $html   .=  ' selected';    }
             
-            $html   .=  '>' . $i . ' h</option>' ;          
+            $html   .=  '>' . $element . '</option>' ;          
+            
+            $i++;
         }
         
         $html   .=  '</select>';
@@ -258,12 +266,28 @@ class HTMLUserTableClass extends HTMLTableClass
         return $html;
     }
     
+    public function readAllZweckeFromDB ()
+    {
+        $sql    =   "SELECT * FROM " . T_EINSATZ_ZWECKE . ";";
+        //echo $sql;
+        $zwecke =   DBclass::query($sql)->all();
+        //print_r($zwecke);
+        
+        //Index ist nun der Spatlenname
+        //rearrange aray, um index 0...X zu erhalten - damit es zur Funktion $this->generateDropDown() passt
+        $zwecke_rearranged = array();
+        foreach ($zwecke as $zweck)
+        {   array_push($zwecke_rearranged, $zweck[Z_ZWECK_NAME]);   }
+        
+        return $zwecke_rearranged;
+    }
+    
     public function addFinalRow ()
     {      
         $this->htmlString   .=  
             '   <li class="table-header">
-                <div class="col col-1">Summe Stunden absolviert: </div>
-                <div class="col col-2"></div>
+                <!--<div class="col col-1"></div>//-->
+                <div class="col col-2">Summe Stunden absolviert: </div>
                 <div class="col col-3">
                     <div style="display:inline" id="summe_stunden">' . $this->myFamily->returnGeleisteteStunden() . '</div>
                     h / 

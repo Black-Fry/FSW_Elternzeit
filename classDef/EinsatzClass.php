@@ -26,11 +26,11 @@ class EinsatzClass
         {   $this->einsatzID    =   ""; }
 
         if ($_dbRow[E_EINSATZ_ZWECK_ID])
-        {   $this->einsatzID    =   $_dbRow[E_EINSATZ_ID]; }
+        {   $this->zweckID    =   $_dbRow[E_EINSATZ_ZWECK_ID]; }
         else
-        {   $this->einsatzID    =   ""; }   
+        {   $this->zweckID    =   ""; }   
         
-        //$this->getZweckNam();
+        $this->getZweckNam();
         
         if ($_dbRow[E_EINSATZ_EINSATZ_DATE])
         {   $this->date         =   $_dbRow[E_EINSATZ_EINSATZ_DATE]; }
@@ -59,8 +59,10 @@ class EinsatzClass
     function getZweckNam ()
     {
         $sql    =   "SELECT " . Z_ZWECK_NAME . " FROM " . T_EINSATZ_ZWECKE . " WHERE " . Z_ZWECK_ID . " = " . $this->zweckID . ";\"";
+        //echo $sql;
         $result = DBclass::query($sql)->all();
-        $this->zweckNam =   $result[Z_ZWECK_NAME];
+        //print_r($result);
+        $this->zweckNam =   $result[0][Z_ZWECK_NAME];
     }
     
     function getEinsatzDate()
@@ -74,5 +76,8 @@ class EinsatzClass
     
     function getKommentar()
     {   return $this->comment;  }
+    
+    function returnZweckNam ()
+    {   return $this->zweckNam; }
     
 }
