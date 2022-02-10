@@ -180,10 +180,12 @@ class HTMLAdminTableClass extends HTMLTableClass
 
 class HTMLUserTableClass extends HTMLTableClass
 {
+    public $myFamily;
 
-    public function HTMLUserTableClass ()
+    public function HTMLUserTableClass ($_myFamily)
     {   
-        $this->view    =   USER_VIEW;
+        $this->myFamily =   $_myFamily;   
+        $this->view     =   USER_VIEW;
         $this->initTable();
     }
     
@@ -201,32 +203,29 @@ class HTMLUserTableClass extends HTMLTableClass
     public function createHeader ()
     {
         $this->htmlString   .=  '<li class="table-header">'
-            .   '   <div class="col col-1">Nummer</div>
+            .   '   <div class="col col-1">Nummer<br><br>(<b>noch statisch</b>)</div>
                     <div class="col col-2">Datum</div>
                     <div class="col col-3">Stunden</div>
                     <div class="col col-4">Verabredete T&auml;tigkeit</div>
-                    <div class="col col-5">Im Auftrag bzw. Rahmen der Arbeitsgruppe</div>';
+                    <div class="col col-5">Im Auftrag bzw. Rahmen der Arbeitsgruppe<br><br>(<b>noch statisch</b>)</div>';
     }
     
+    //param wird benoetugt fuer einsatzobjekte
     public function addRow ($_valueObj)
     {
-        //$jsID = $_valueObj->getFamID();
-        //echo $jsID;
+        $einsatzID  =  $_valueObj->getEinsatzID(); 
+        
         $this->htmlString   .=     '<li class="table-row">';
         
         $this->htmlString   .=
-            '<div class="col col-1" data-label="Nummer">1</div>
-             <div class="col col-2" data-label="Datum">03.10.2021</div>
-             <div class="col col-3" data-label="Stunden">
-                <select id="h" name="h">
-                    <option value="0,5">0.5 h</option>
-                    <option value="1,0">1.0 h</option>
-                    <option value="1,5">1,5 h</option>
-                    <option value="2,0">2,0 h</option>
-                    <option value="...">...</option>
-                </select>
-             </div>
-             <div class="col col-4" data-label="Action"><textarea name="Text1" cols="25" rows="3">Schachbrett & -figuren geputzt</textarea></div>
+            '<div class="col col-1" data-label="Nummer"></div>
+             <div class="col col-2" data-label="Datum">' . $_valueObj->getEinsatzDate() . '</div>
+             <div class="col col-3" data-label="Stunden">';
+        
+        $this->htmlString   .= $this->generateDropDown(10, 0.5, ("h' . $einsatzID"), $_valueObj->getLength());
+
+        $this->htmlString   .=    '</div>
+             <div class="col col-4" data-label="Action"><textarea name="einsatzText_"' . $einsatzID . ' cols="25" rows="3">' . $_valueObj->getKommentar() . '</textarea></div>
              <div class="col col-5" data-label="AG">
                 <select id="h" name="h">
                     <option value="0" selected>AK Haus und Garten</option>
@@ -240,13 +239,45 @@ class HTMLUserTableClass extends HTMLTableClass
         $this->htmlString   .=      '</li>';
     }
     
+    public function generateDropDown ($_range, $_steps, $_selectNam, $_selectedValue)
+    {        
+        $html   =   '<select id="' . $_selectNam . '" name="' . $_selectNam . '">';
+        
+        for ($i=0; $i<$_range; $i=$i+$_steps )
+        {   
+            $html   .= '<option value="' . $i . '"';
+            
+            if ($_selectedValue ==  $i)
+            {   $html   .=  ' selected';    }
+            
+            $html   .=  '>' . $i . ' h</option>' ;          
+        }
+        
+        $html   .=  '</select>';
+            
+        return $html;
+    }
+    
     public function addFinalRow ()
     {      
         $this->htmlString   .=  
             '   <li class="table-header">
-                <div class="col col-1">Summe Stunden: </div>
+                <div class="col col-1">Summe Stunden absolviert: </div>
                 <div class="col col-2"></div>
-                <div class="col col-3">absolviert: 0,5 h / 40h</div>
+                <div class="col col-3">
+                    <div style="display:inline" id="summe_stunden">' . $this->myFamily->returnGeleisteteStunden() . '</div>
+                    h / 
+                    <div style="display:inline" id="pensum">';
+        
+            if ($this->myFamily->isSingle())
+            {   $this->htmlString   .=  20; }
+            else
+            {   $this->htmlString   .=  40; }
+
+        $this->htmlString   .=  
+                    '</div>
+                    h
+                </div>
                 <div class="col col-4"><input type="button" value="Neue Zeile hinzufügen"></div>
                 <!--<div class="col col-5"><input type="button" value="Zeile entfernen"></div>//-->
             </li>';

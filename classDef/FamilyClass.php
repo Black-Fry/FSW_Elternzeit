@@ -1,10 +1,5 @@
 <?php
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
- */
-
 /**
  * Description of FamilyClass
  *
@@ -54,7 +49,7 @@ class FamilyClass
         else
         {   $this->FamMailTwo    =   ""; }        
         
-        $this->geleisteteStunden    =   0;
+        $this->calculateStundenFromDB();
         $this->lastUserEdit         =   0;
         
     }  
@@ -111,10 +106,13 @@ class FamilyClass
         return FALSE;
     }
     
-    function calculateStundenFromDB ($_famEinsaetzStunden)
+    function calculateStundenFromDB ()
     {  
+        //read Stunden pro Family from DB
+        $_famEinsatzStunden = DBclass::query("SELECT * FROM " . T_EINSAETZE . " WHERE `FamID` = " . $this->getFamID() . " ORDER BY `TimeStamp` DESC;\"")->all();
+        
         $lastUserEdit = 0; //erster Eintrag ist aus MySQL ORDER DESC-Statement auch gleichzeitig das aktuellste UserEdit
-        foreach ($_famEinsaetzStunden as $singleEinsatz)
+        foreach ($_famEinsatzStunden as $singleEinsatz)
         {   
             if (0 == $lastUserEdit)
             {

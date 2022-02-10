@@ -19,8 +19,8 @@ function readFamiliesFromDB($htmlTableObj)
         $famObj = new FamilyClass($family);
         
         //read Stunden pro Family from DB
-        $famEinsaetzH = DBclass::query("SELECT * FROM " . T_EINSAETZE . " WHERE `FamID` = " . $famObj->getFamID() . " ORDER BY `TimeStamp` DESC;\"")->all();
-        $famObj->calculateStundenFromDB($famEinsaetzH);
+        //$famEinsaetzH = DBclass::query("SELECT * FROM " . T_EINSAETZE . " WHERE `FamID` = " . $famObj->getFamID() . " ORDER BY `TimeStamp` DESC;\"")->all();
+        //$famObj->calculateStundenFromDB($famEinsaetzH);
         
         //place content into param table - one row per famObj
         $htmlTableObj->addRow($famObj);

@@ -2,6 +2,7 @@
 
 include '../classDef/DBclass.php';
 include '../classDef/FamilyClass.php';
+include '../classDef/EinsatzClass.php';
 include '../classDef/HTMLTableClass.php';
 
 
@@ -14,26 +15,23 @@ function decodeFamilyFromURL ()
     return (new FamilyClass($_dbRow[0]));
 }
 
-function readEinsaetzeFromDB($htmlTableObj)
+function readEinsaetzeFromDB($htmlTableObj, $_famID)
 {       
     //DBClass::connect();
 
-    //$families = DBclass::query("SELECT * FROM " . T_FAM . ";\"")->all();
-    
-    /*foreach ($families as $family)
+    $einsaetze = DBclass::query("SELECT * FROM " . T_EINSAETZE . " WHERE " . F_FAM_ID . " = " . $_famID . ";\"")->all();
+    //print_r($einsaetze);
+    $i  =   0;
+    foreach ($einsaetze as $einsatz)
     {
-        //print_r($family);
-        $famObj = new FamilyClass($family);
-        
-        //read Stunden pro Family from DB
-        $famEinsaetzH = DBclass::query("SELECT * FROM " . T_EINSAETZE . " WHERE `FamID` = " . $famObj->getFamID() . " ORDER BY `TimeStamp` DESC;\"")->all();
-        $famObj->calculateStundenFromDB($famEinsaetzH);
-        
+        //print_r($einsatz);
+        $einsatzObj = new EinsatzClass($einsatz);
+                
         //place content into param table - one row per famObj
-        $htmlTableObj->addRow($famObj);
-    }*/
+        $htmlTableObj->addRow($einsatzObj, $i);
+        $i++;
+    }
 
-    $htmlTableObj->addRow($htmlTableObj);
     
     $htmlTableObj->addFinalRow();
 }
@@ -93,11 +91,10 @@ echo (' onclick="bgQuery(\'' . "UPDATE" . '\', ' . ENCODED_T_FAM . ', \'' . F_FA
         <br>');
 
 
-$userHTMLTab   =   new HTMLUserTableClass();
+$userHTMLTab   =   new HTMLUserTableClass($family);
 
 
-
-readEinsaetzeFromDB($userHTMLTab);
+readEinsaetzeFromDB($userHTMLTab, $family->getFamID());
 
 echo $userHTMLTab->returnHTML();
 

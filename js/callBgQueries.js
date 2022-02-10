@@ -24,9 +24,11 @@ function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
             {
                 case true:
                     _newValue   =   '1';
+                    document.getElementById('pensum').innerHTML   =   "20";
                     break;
                 case false:
                     _newValue   =   "0";
+                    document.getElementById('pensum').innerHTML   =   "40";
             }
         }
         //aufruf kommt aus admin view. kein translate noetig
