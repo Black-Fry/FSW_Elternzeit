@@ -14,13 +14,25 @@ function generateUpdateStatement ($_cryptoTabNam, $_fieldToBeUpdated, $_newValue
    return $sql;
 }
 
-function generateInsertStatement ($_cryptoTabNam)
+function generateInsertStatement ($_cryptoTabNam, $_famID)
 {
     $tabNam = getRealTabNam ($_cryptoTabNam);
     
-    $sql    =   "INSERT INTO " . $tabNam . " "
+    if ($tabNam == T_FAM)
+    {   
+        $sql    =   "INSERT INTO " . $tabNam . " "
             . "(`" . F_FAM_ID. "`, `" . F_FAM_NAM . "`, `" . F_FAM_CRYPTURL . "`, `" . F_FAM_SINGLE . "`, `" . F_FAM_MAIL_ONE . "`, `" . F_FAM_MAIL_TWO . "`) "
             . " VALUES (NULL, NULL, \"" . generateRandomString() . "\", '0', NULL, NULL);";
+    }
+    else if ($tabNam == T_EINSAETZE)
+    {
+        
+        //INSERT INTO `Tab_Einsaetze` (`EinsatzID`, `FamID`, `ZweckID`, `EinsatzDate`, `EinsatzLength`, `TimeStamp`, `Kommentar`) VALUES (NULL, '', NULL, NULL, '0.0', CURRENT_TIMESTAMP, NULL);
+        $sql    =   "INSERT INTO " . $tabNam . " "
+            . "(`" . E_EINSATZ_ID . "`, `" . F_FAM_ID . "`, `" . E_EINSATZ_ZWECK_ID . "`, `" . E_EINSATZ_EINSATZ_DATE . "`, `" . E_EINSATZ_LENGTH . "`, `" . E_EINSATZ_TIME_STAMP . "`, `" . E_EINSATZ_COMMENT . "`) "
+            . " VALUES (NULL, " . $_famID . ", 9, NULL, 0.0, CURRENT_TIMESTAMP, NULL);";
+        //einsatzZweck 9 = "bitte auswählen"
+    }
     
     return $sql;
 }
@@ -114,7 +126,7 @@ if( !isset($aResult['error']) )
            {    $aResult['error'] = 'Error in arguments!';  }
            else 
            {
-                $sql                = generateInsertStatement($_POST['arguments'][0]);
+                $sql                = generateInsertStatement($_POST['arguments'][0], $_POST['arguments'][3]);
                 //DBClass::connect();
                 $aResult['result']  = $sql . " |INSERT| ";
                 $aResult['result']  .= DBclass::query($sql)->all();   
@@ -130,7 +142,7 @@ if( !isset($aResult['error']) )
                 foreach ($idsToBeDeleted as $singleIdToBeDeleted)
                 {
                     $sql                = generateDeleteStatement($_POST['arguments'][0], $singleIdToBeDeleted);
-                    //$aResult['result']  = $sql . " |DELETE| ";
+                    //$aResult['result']  = $sql . " |DELETE| " . $singleIdToBeDeleted;
                     $aResult['result']  .= DBclass::query($sql)->all();   
                 }
            }

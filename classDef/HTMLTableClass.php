@@ -221,8 +221,11 @@ class HTMLUserTableClass extends HTMLTableClass
         
         $this->htmlString   .=
             '<!--<div class="col col-1" data-label="Nummer"></div>//-->
-             <div class="col col-2" data-label="Datum_"' . $einsatzID . '>' . $_valueObj->getEinsatzDate() . '</div>
-             <div class="col col-3" data-label="Stunden' . $einsatzID . '">';
+             <div class="col col-2" data-label="Datum_"' . $einsatzID . '>
+                <input type="text" id="datepicker" name="datepicker_' . $einsatzID . '" value="' . $_valueObj->getEinsatzDate() . '">
+            </div>';
+            
+        $this->htmlString   .=  '<div class="col col-3" data-label="Stunden' . $einsatzID . '">';
         
         $this->htmlString   .= $this->generateDropDown(range(0, 21, 0.5), ("h_" . $einsatzID), $_valueObj->getLength());
 
@@ -298,13 +301,18 @@ class HTMLUserTableClass extends HTMLTableClass
             else
             {   $this->htmlString   .=  40; }
 
+        //debug_to_console("rows 1, 2, 3 erstellt");
         $this->htmlString   .=  
                     '</div>
                     h
                 </div>
-                <div class="col col-4"><input type="button" value="Neue Zeile hinzufügen"></div>
-                <!--<div class="col col-5"><input type="button" value="Zeile entfernen"></div>//-->
-            </li>';
+                <div class="col col-4"></div>
+                <div class="col col-5">
+                    <input type="button" onClick="bgQuery(\'' . "INSERT" . '\', ' . ENCODED_T_EINSAETZE . ', 0, 0, '. $this->myFamily->getFamID () .')" value="Eine neue Zeile einfügen"/>
+                </div>';    
+                
+                //<!--<div class="col col-5"><input type="button" value="Zeile entfernen"></div>//-->
+        $this->htmlString   .='</li>';
                 
         //'<input type="button" onClick="bgQuery(\'' . "DELETE" . '\', ' . ENCODED_T_FAM . ', 0, 0, 0)" value="Markierte Zeilen löschen"/>'
         //'<input type="button" onClick="bgQuery(\'' . "INSERT" . '\', ' . ENCODED_T_FAM . ', 0, 0, 0)" value="Eine neue Zeile einfügen"/>'
@@ -320,6 +328,7 @@ class HTMLUserTableClass extends HTMLTableClass
     public function returnHTML ()
     {   
         $this->finishTable();
+        //debug_to_console($this->htmlString);
         return $this->htmlString; 
     }
 }

@@ -26,6 +26,7 @@ function readEinsaetzeFromDB($htmlTableObj, $_famID)
     {
         //print_r($einsatz);
         $einsatzObj = new EinsatzClass($einsatz);
+        //debug_to_console("einsatzObj erstellt");
                 
         //place content into param table - one row per famObj
         $htmlTableObj->addRow($einsatzObj);
@@ -92,9 +93,10 @@ echo (' onclick="bgQuery(\'' . "UPDATE" . '\', ' . ENCODED_T_FAM . ', \'' . F_FA
 
 
 $userHTMLTab   =   new HTMLUserTableClass($family);
-
+//debug_to_console("generated user tab");
 
 readEinsaetzeFromDB($userHTMLTab, $family->getFamID());
+//debug_to_console("gathered all einsatz from db");
 
 echo $userHTMLTab->returnHTML();
 

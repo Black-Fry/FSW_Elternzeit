@@ -1,15 +1,12 @@
 //receive args: sql-cmd, cryptoTabNam, field2Bupdated, newValue, id
 function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
-{
-    //sqlCmd          = 'UPDATE';
-    //cryptoTabNam    = 1;
-    //fieldnam        = "FamNam";
-    //newValue        = "Hans";
-    //id              = 9;
-    
+{   
     // wenn leere Zeilen gelöscht werden sollen, dann kann js die ids selbst aus DOM & "checked" Inputs finden
     if ( _sqlCmd === 'DELETE') 
-    {  _id =   JSON.stringify(gatherAllCheckedRows()); }
+    {  
+        _id =   JSON.stringify(gatherAllCheckedRows()); 
+        console.log(_id);
+    }
     
     // lies wert des upgedateten Text-Inputs. param '_newValue' transportiert id, mit derne Hilfe
     //  per js/DOM der aktuelle wert ausgelesen werden kann
@@ -72,7 +69,7 @@ function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
                 //reload page
                 if ( (_sqlCmd === 'INSERT') || (_sqlCmd === 'DELETE') )
                 {   
-                    var url = "http://fsw.ossoelmi.berlin/views/admin.php";
+                    var url = window.location.href;
                     window.open(url, "_self");
                 }
             }
@@ -102,18 +99,25 @@ function gatherAllCheckedRows()
         else
         {
             const stringSplit   = idString.split('_');
-            var geleisteteStunden   = parseInt(stringSplit[2]);  
-                        
-            if ( 0 === geleisteteStunden )
-            {   paramArray.push(stringSplit[1]);  }
+            var geleisteteStunden   = parseInt(stringSplit[2]); 
+            console.log(geleisteteStunden);
+                  
+            //wenn keine Stunde eingegebn wurde, erkennt js "NaN"
+            if ( ! geleisteteStunden )
+            {   
+                paramArray.push(stringSplit[1]);  
+                //console.log(stringSplit[1]);
+            }
             else
-            {   zeroHourWatchDog    =   true;   }
+            {   
+                zeroHourWatchDog    =   true;   
+                //console.log(stringSplit[1] + " sets watchDog = true" + ", geleisteteStunden = " + geleisteteStunden);
+            }
         }
     }
     
-    if (zeroHourWatchDog)
-    {   alert("Es dürfen nur Zeilen gelöscht werden, in denen noch keine Stunden geleistet wurden.\n\
-                Soll eine andere Zeile gelöscht werden, bitte kontaktiere die/den Admin!");    }
+    if (true === zeroHourWatchDog)
+    {   alert("Es dürfen nur Zeilen gelöscht werden, in denen noch keine Stunden geleistet wurden.\n\Soll eine andere Zeile gelöscht werden, bitte kontaktiere die/den Admin!");    }
     
     return paramArray;
 }
