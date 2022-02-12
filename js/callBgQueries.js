@@ -1,6 +1,9 @@
 //receive args: sql-cmd, cryptoTabNam, field2Bupdated, newValue, id
 function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
 {   
+    
+    aktualisiereEinsatzDauerSumme(_fieldnam);
+    
     // wenn leere Zeilen gelöscht werden sollen, dann kann js die ids selbst aus DOM & "checked" Inputs finden
     if ( _sqlCmd === 'DELETE') 
     {  
@@ -30,7 +33,10 @@ function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
         }
         //aufruf kommt aus admin view. kein translate noetig
         else
-        {   _newValue   = document.getElementById(_newValue.name).value;    }
+        {   
+            _newValue   = document.getElementById(_newValue.name).value;    
+            //console.log(_newValue);
+        }
         
         
     }
@@ -56,6 +62,7 @@ function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
                 //show "success within toast;
                 if ( _sqlCmd === 'UPDATE' )
                 {   
+                    console.log("UPDATE");
                     // Get the snackbar DIV
                     var x = document.getElementById("snackbar");
 
@@ -120,4 +127,29 @@ function gatherAllCheckedRows()
     {   alert("Es dürfen nur Zeilen gelöscht werden, in denen noch keine Stunden geleistet wurden.\n\Soll eine andere Zeile gelöscht werden, bitte kontaktiere die/den Admin!");    }
     
     return paramArray;
+}
+
+//function wird nur auf PullDown "EinsatzLength" angewendet & summiert die neue Einsatzlaenge auf die TabFußzeile
+function aktualisiereEinsatzDauerSumme (_fieldname)
+{
+    //console.log(_fieldname);
+    
+    if ( (String(_fieldname)).includes("EinsatzLength"))
+    {    
+        console.log("got it");
+        
+        var stundenFelder   = document.querySelectorAll('[id^="EinsatzLength_"]');   
+        var stundenGesamt   = 0;
+        
+        //console.log(stundenFelder.length);
+
+        for (i=0; i<stundenFelder.length; i++)
+        {
+            var stunden = parseInt(stundenFelder.item(i).value);
+            stundenGesamt = stundenGesamt   +   stunden;
+            //console.log(stundenFelder.item(i).value);
+        }
+
+        document.getElementById('summe_stunden').innerHTML   =   stundenGesamt;
+    }
 }

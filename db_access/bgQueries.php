@@ -4,14 +4,28 @@
 
 include '../classDef/DBclass.php';
 
+//scheint fehler zu produzieren
 function generateUpdateStatement ($_cryptoTabNam, $_fieldToBeUpdated, $_newValue, $_id)
 {
     $tabNam = getRealTabNam($_cryptoTabNam);
+
+    //htmlTable liefert leider nur EinsatzZweckNam, NICHT die ID
+    if (E_EINSATZ_ZWECK_ID  ==   $_fieldToBeUpdated)
+    {   $_newValue  =   resolveEinsatzID ($_newValue);  }
     
     $sql    =   "UPDATE " . $tabNam . " SET `" . $_fieldToBeUpdated . "` = '" . $_newValue
             . "' WHERE `" . getRealIdFieldNam ($tabNam) . "` = " . $_id . ";";
-   
-   return $sql;
+    //debug_to_console($sql);
+    return $sql;
+}
+
+function resolveEinsatzID($_einsatzNam)
+{
+    $sql    =   "SELECT " . Z_ZWECK_ID . " FROM " . T_EINSATZ_ZWECKE . " WHERE " . Z_ZWECK_NAME . " = '" . $_einsatzNam . "';";
+
+    $einsatzID  = DBclass::query($sql)->one();  
+
+    return ($einsatzID['' . Z_ZWECK_ID . '']);
 }
 
 function generateInsertStatement ($_cryptoTabNam, $_famID)
@@ -143,7 +157,7 @@ if( !isset($aResult['error']) )
                 {
                     $sql                = generateDeleteStatement($_POST['arguments'][0], $singleIdToBeDeleted);
                     //$aResult['result']  = $sql . " |DELETE| " . $singleIdToBeDeleted;
-                    $aResult['result']  .= DBclass::query($sql)->all();   
+                    //$aResult['result']  .= DBclass::query($sql)->all();   
                 }
            }
            break;

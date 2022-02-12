@@ -8,9 +8,18 @@ include '../classDef/HTMLTableClass.php';
 
 function decodeFamilyFromURL ()
 {
-    $sql    =   "SELECT * FROM " . T_FAM . " WHERE " . F_FAM_CRYPTURL . " = '" . $_GET['cryurl'] . "';";
-    //echo $sql;
+    //wurde die URL ohne CryptGeheimnis aufgerufen? Leite um zum index.php
+    if (! $_GET['cryurl']) 
+    {   header('Location: ' . ROOT_URL); }
+    
+    $sql    =   "SELECT * FROM " . T_FAM . " WHERE  EXISTS (SELECT * FROM " . T_FAM . " WHERE " . F_FAM_CRYPTURL . " = '" . $_GET['cryurl'] . "');";
+    //echo ($sql);
     $_dbRow =   DBclass::query($sql)->all();
+    //$_dbRow =   DBclass::query($sql)->query();
+    
+    //wurde die URL mit ungueltigem CryptGeheimnis aufgerufen? Leite um zum index.php
+    if (! $_dbRow) 
+    {   header('Location: ' . ROOT_URL); }
     
     return (new FamilyClass($_dbRow[0]));
 }
@@ -39,6 +48,8 @@ function readEinsaetzeFromDB($htmlTableObj, $_famID)
 
 
 //-------------------
+$family =   decodeFamilyFromURL ();
+
 
 echo ('<!DOCTYPE html>
         <html lang="de">
@@ -49,7 +60,9 @@ echo ('<!DOCTYPE html>
                 <!--  die drei sind fürs tabellendesign:   //-->
                 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-                <link rel="stylesheet" href="../styles/userTabStyles.css">');
+                <link rel="stylesheet" href="../styles/userTabStyles.css">
+                
+                <link rel="stylesheet" href="../styles/datepicker.css">');
 
 //Tabellen right-sizing:
 echo (' <script>
@@ -69,7 +82,7 @@ echo ('         <link rel="stylesheet" href="../styles/inputGlow.css">
             </head>
             <body translate="no" >');
 
-$family =   decodeFamilyFromURL ();
+//$family =   decodeFamilyFromURL ();
 
 echo ('<div class="container">
         <p align="left">Arbeitsstundennachweis Schuljahr 2021/2022</p>

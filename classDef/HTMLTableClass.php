@@ -222,24 +222,25 @@ class HTMLUserTableClass extends HTMLTableClass
         $this->htmlString   .=
             '<!--<div class="col col-1" data-label="Nummer"></div>//-->
              <div class="col col-2" data-label="Datum_"' . $einsatzID . '>
-                <input type="text" id="datepicker" name="datepicker_' . $einsatzID . '" value="' . $_valueObj->getEinsatzDate() . '">
+                <input type="date" name="datepicker_' . $einsatzID . '" id="datepicker_' . $einsatzID . '" value="' . $_valueObj->getEinsatzDate() . '" onchange="bgQuery(\'' . "UPDATE" . '\', ' . ENCODED_T_EINSAETZE . ', \'' . E_EINSATZ_EINSATZ_DATE . '\', this, ' . $einsatzID . ')">                
             </div>';
             
         $this->htmlString   .=  '<div class="col col-3" data-label="Stunden' . $einsatzID . '">';
         
-        $this->htmlString   .= $this->generateDropDown(range(0, 21, 0.5), ("h_" . $einsatzID), $_valueObj->getLength());
+        $this->htmlString   .= $this->generateDropDown(range(0, 21, 0.5), (E_EINSATZ_LENGTH . "_"), $einsatzID, $_valueObj->getLength(), E_EINSATZ_LENGTH);
 
         $this->htmlString   .=    '</div>';
         
         $this->htmlString   .=
-             '<div class="col col-4" data-label="Action"><textarea name="einsatzText_' . $einsatzID . '" cols="25" rows="3">' . $_valueObj->getKommentar() . '</textarea></div>';
+             '<div class="col col-4" data-label="Action">'
+                . '<textarea id="einsatzText_' . $einsatzID . '" name="einsatzText_' . $einsatzID . '" cols="35" rows="3" onchange="bgQuery(\'' . "UPDATE" . '\', ' . ENCODED_T_EINSAETZE . ', \'' . E_EINSATZ_COMMENT . '\', this, ' . $einsatzID . ')">' . $_valueObj->getKommentar() . '</textarea></div>';
 
         $this->htmlString   .=
             '<div class="col col-5" data-label="AG_' . $einsatzID . '">';
          
             $einsatzZwecke      =   $this->readAllZweckeFromDB();
             //echo $_valueObj->returnZweckNam();
-            $this->htmlString   .= $this->generateDropDown($einsatzZwecke, ("zweck_" . $einsatzID), $_valueObj->returnZweckNam());
+            $this->htmlString   .= $this->generateDropDown($einsatzZwecke, "zweck_", $einsatzID, $_valueObj->returnZweckNam(), E_EINSATZ_ZWECK_ID);
         
         $this->htmlString   .=     '</div>';
         
@@ -247,9 +248,11 @@ class HTMLUserTableClass extends HTMLTableClass
     }
     
 
-    public function generateDropDown ($_array, $_selectNam, $_selectedValue)
+    public function generateDropDown ($_array, $_selectNam, $_einsID, $_selectedValue, $_updateFieldNam)
     {        
-        $html   =   '<select id="' . $_selectNam . '" name="' . $_selectNam . '">';
+        $html   =   '<select id="' . $_selectNam . $_einsID . '" name="' . $_selectNam . $_einsID . '"';
+        $html   .=  ' onchange="bgQuery(\'' . "UPDATE" . '\', ' . ENCODED_T_EINSAETZE . ', \'' . $_updateFieldNam . '\', this, ' . $_einsID . ')"';
+        $html   .=  '>';
         //print_r($_array);
         $i = 0;
         foreach ($_array as $element)
@@ -264,7 +267,7 @@ class HTMLUserTableClass extends HTMLTableClass
             $i++;
         }
         
-        $html   .=  '</select>';
+        $html   .=  '</select>';       
             
         return $html;
     }
