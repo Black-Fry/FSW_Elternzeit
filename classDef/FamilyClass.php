@@ -51,6 +51,7 @@ class FamilyClass
         
         $this->calculateStundenFromDB();
         $this->lastUserEdit         =   0;
+        //$this->geleisteteStunden    =   0;    //entfernt alle Einträge aus Tabelle weil per default alle gel Stunden auf 0 gesetzt werden
         
     }  
     

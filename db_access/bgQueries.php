@@ -157,7 +157,7 @@ if( !isset($aResult['error']) )
                 {
                     $sql                = generateDeleteStatement($_POST['arguments'][0], $singleIdToBeDeleted);
                     //$aResult['result']  = $sql . " |DELETE| " . $singleIdToBeDeleted;
-                    //$aResult['result']  .= DBclass::query($sql)->all();   
+                    DBclass::query($sql)->all();   
                 }
            }
            break;

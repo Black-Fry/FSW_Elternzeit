@@ -12,7 +12,8 @@ function decodeFamilyFromURL ()
     if (! $_GET['cryurl']) 
     {   header('Location: ' . ROOT_URL); }
     
-    $sql    =   "SELECT * FROM " . T_FAM . " WHERE  EXISTS (SELECT * FROM " . T_FAM . " WHERE " . F_FAM_CRYPTURL . " = '" . $_GET['cryurl'] . "');";
+    //$sql    =   "SELECT * FROM " . T_FAM . " WHERE  EXISTS (SELECT * FROM " . T_FAM . " WHERE " . F_FAM_CRYPTURL . " = '" . $_GET['cryurl'] . "');";
+    $sql    =   "SELECT * FROM " . T_FAM . " WHERE " . F_FAM_CRYPTURL . " = '" . $_GET['cryurl'] . "';";
     //echo ($sql);
     $_dbRow =   DBclass::query($sql)->all();
     //$_dbRow =   DBclass::query($sql)->query();

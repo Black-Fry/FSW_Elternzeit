@@ -7,7 +7,10 @@ function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
     // wenn leere Zeilen gelöscht werden sollen, dann kann js die ids selbst aus DOM & "checked" Inputs finden
     if ( _sqlCmd === 'DELETE') 
     {  
-        _id =   JSON.stringify(gatherAllCheckedRows()); 
+        alarm      =   true;   //gib einen js.alarm, wenn felder mit "geleistete Stunden != 0" markiert worden sind (DELETE)
+        countFamIDs =   false;  //brauchen wir hier nicht. wir wollen zeile(n) in Abhängigkeit der geleisteten Stunden löschen
+        countHours  =   true;   //das wollen wir
+        _id =   JSON.stringify(gatherAllCheckedRows(alarm, countFamIDs, countHours)); 
         console.log(_id);
     }
     
@@ -89,8 +92,9 @@ function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
     });
 }
    
-//alert wenn Stunden != 0!
-function gatherAllCheckedRows()
+//param: _alarm (bool)! Wird benötigt, falls Zeilen gelöscht werden sollen, deren Stunden != 0!
+//bool: _countBoxes, _countHours: entscheiden, ob Fktn "geleistete Stunden" einer Zeile oder deren FamID zurück gibt
+function gatherAllCheckedRows(_alarm, _countFamIDs, _countHours)
 { 
     var checkedFields       = document.querySelectorAll('input[type="checkbox"]:checked');   
     const paramArray        = [];
@@ -100,10 +104,11 @@ function gatherAllCheckedRows()
     {
         var idString = String(checkedFields.item(i).id);
         
-        //es gibt ein weiteres Checkbox-Element: "Alleinstehend" (single). Das brauchen wir hier nicht
-        if ( idString.includes("single") )
+        //(1) es gibt ein weiteres Checkbox-Element: "Alleinstehend" (single). Das brauchen wir hier nicht
+        //(2) und es gibt die CheckBox "checkAllBoxes" Feld aus Admin-View. Wird auch nicht benoetigt
+        if ( idString.includes("single") || idString.includes("tickAll") )
         {   continue;   }
-        else
+        else if ( (true === _countHours) && (false === _countFamIDs) )
         {
             const stringSplit   = idString.split('_');
             var geleisteteStunden   = parseInt(stringSplit[2]); 
@@ -121,9 +126,14 @@ function gatherAllCheckedRows()
                 //console.log(stringSplit[1] + " sets watchDog = true" + ", geleisteteStunden = " + geleisteteStunden);
             }
         }
+        else if ( (true === _countFamIDs) && (false === _countHours) )
+        {
+            const stringSplit   = idString.split('_');
+            paramArray.push(parseInt(stringSplit[1])); 
+        }
     }
     
-    if (true === zeroHourWatchDog)
+    if ( (true === zeroHourWatchDog) && (true === _alarm) )
     {   alert("Es dürfen nur Zeilen gelöscht werden, in denen noch keine Stunden geleistet wurden.\n\Soll eine andere Zeile gelöscht werden, bitte kontaktiere die/den Admin!");    }
     
     return paramArray;
@@ -153,3 +163,46 @@ function aktualisiereEinsatzDauerSumme (_fieldname)
         document.getElementById('summe_stunden').innerHTML   =   stundenGesamt;
     }
 }
+
+//prepare mails to be sent. param: none
+// famId(s) kommen aus gatherAllCheckedRows()
+function prepareMails()
+{     
+    alarm       =   false;      //kein Alarm benötigt
+    countFamIDs =   true;       //brauchen wir hier
+    countHours  =   false;      //das wollen wir nicht
+    famIDs      =   JSON.stringify(gatherAllCheckedRows(alarm, countFamIDs, countHours));
+    //console.info(famIDs);
+    
+    jQuery.ajax(
+    {
+        type: "POST",
+        url: "http://fsw.ossoelmi.berlin/mail/prepareAndSendMail.php",
+        dataType: 'json',
+        data: {arguments: famIDs},
+
+        success: function (obj) 
+        {
+            if( !('error' in obj) ) 
+            {   
+                console.log(obj.result);
+                
+                //show "success within toast;
+                var x = document.getElementById("snackbar");
+
+                // Add the "show" class to DIV
+                x.innerHTML     = "Mails gesendet";
+                x.className     = "show";
+
+                // After 3 seconds, remove the show class from DIV
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
+            else 
+            {
+                //output error in toast
+                console.log(obj.error);
+            }
+        }
+    });
+}
+
