@@ -28,5 +28,6 @@ if( !isset($aResult['error']) )
     $aResult['result'] = count($families);
 }
 
+
 echo json_encode($aResult);
 
