@@ -18,3 +18,6 @@ https://www.w3schools.com/howto/howto_js_snackbar.asp
 
 //datepicker
 https://codepen.io/maheshambure21/pen/VYJQYG
+
+//qr-code generator
+http://phpqrcode.sourceforge.net/

@@ -29,25 +29,30 @@ class MailClass
     
     function setText ()
     {
-        $this->text =   "Liebe Familie " . $this->famObj->getFamNam () . ",
-            dies ist eine Erinnerungsmail der FSW. Ihr habt im aktuellen Schuljahr bereits " . /*$this->famObj->returnGeleisteteStunden () .*/ " Elternstunden
-            geleistet. Insgesamt m&uuml;sst Ihr ";
+        $link = USER_URL . $this->famObj->getCryptoSecret ();
+        
+        $this->text =   "Liebe Familie " . $this->famObj->getFamNam () . ",<br><br>
+            dies ist eine Erinnerungsmail der FSW.<br><br>Toll - Ihr habt im aktuellen Schuljahr bereits einige " . /*$this->famObj->returnGeleisteteStunden () .*/ " Elternstunden
+            geleistet. Danke f&uuml;r Euer Engagement!<br>
+            Insgesamt m&uuml;sst Ihr ";
         
         if ($this->famObj->isSingle ())
         {   $this->text .=  "" . PENSUM_SORGERECHT_ALLEIN . ""; }
         else
         {   $this->text .=  "" . PENSUM_SORGERECHT_GEMEINSAM . ""; }
         
-        $this->text .= " Stunden absolvieren.
-        Bitte denkt daran, dass nicht erf&uuml;lltes Pensum zum " . ABGABEDATUM . " in eine finanzielle Entsch&auml;digung 
-            gegen&uuml;ber der FSW im Sinne der Schulgemeinschaft umgewandelt und berechnet wird.
-            
-            Ihr k&ouml;nnt Informationen zu den von Euch geleisteten Stunden unter diesem Link pflegen: " . USER_URL . $this->famObj->getCryptoSecret () . " .";
+        $this->text .= " Stunden absolvieren.<br>
+        Bitte denkt daran, dass nicht erf&uuml;lltes Pensum zum " . ABGABEDATUM . " in eine finanzielle Entsch&auml;digung<br>
+            gegen&uuml;ber der FSW im Sinne der Schulgemeinschaft umgewandelt und berechnet wird.<br><br>";
 
-            //In diesem QR-Code ist Euer persönlicher Link kodiert. Druckt ihn Euch aus und hängt ihn Euch an den Kühlschrank, dann könnt Ihr ihn nicht vergessen:
-            //Vorschau Ihres QR Code
-
-        $this->text .=  "Viele Grü&uuml;&szlig;e, Euer Sekretariat der FSW";
+        $this->text .=  "In dem folgenden QR-Code (falls er nicht angezeigt wird, klickt im Mail-Programm auf 'Bilder herunterladen') ist Euer pers&ouml;nlicher, geheimer Link kodiert.<br>
+            Druckt ihn Euch aus und h&auml;ngt ihn Euch an den K&uuml;hlschrank, dann k&ouml;nnt Ihr ihn nicht vergessen:<br>";
+        
+        $this->text .=  '<img src="' . GENERATE_QR . $link . '" />';
+        
+        $this->text .=  "<br>Sollte der QR-Code nicht angezeigt werden, k&ouml;nnt Ihr die Informationen zu den von Euch geleisteten Stunden ebenfalls unter diesem Link pflegen: <a href=" . $link . ">" . $link . "</a> .<br>";
+        
+        $this->text .=  "<br>Viele Gr&uuml;&szlig;e,<br> Euer Sekretariat der FSW";
     }
     
     function getText ()
@@ -56,8 +61,8 @@ class MailClass
     function sendMail ()
     {   
         $header = array('From'  => 'sekretariat@fsw.de',
-                'charset'       => 'iso-8859-1');
-                //'Content-type'  => 'text/html',                
+                'charset'       => 'iso-8859-1',
+                'Content-type'  => 'text/html');
                 //'Reply-To' => 'webmaster@example.com',
                 //'X-Mailer' => 'PHP/' . phpversion()
                 //);
