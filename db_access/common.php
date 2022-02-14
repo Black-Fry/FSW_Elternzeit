@@ -2,10 +2,10 @@
 
 
 /*  define DB-Access data    */
-define ("DB_HOST", "");
-define ("DB_USERNAME", "");
-define ("DB_PASSWORD", "");
-define ("DB_NAME", "");
+define ("DB_HOST", "rdbms.strato.de");
+define ("DB_USERNAME", "dbu783084");
+define ("DB_PASSWORD", "65d01c3d97c81ef2");
+define ("DB_NAME", "dbs5269035");
 
 /*  SQL-Tab-Names    */	
 define ("T_FAM", "Tab_Familien");
