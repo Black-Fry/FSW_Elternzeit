@@ -50,7 +50,7 @@ class FamilyClass
         {   $this->FamMailTwo    =   ""; }        
         
         $this->calculateStundenFromDB();
-        //$this->lastUserEdit         =   0;
+        //$this->lastUserEdit         =   0;    //init mit 0 sorgt dafuer, dass im Admin-Ansicht die letzte Spalte leer bleibt
         //$this->geleisteteStunden    =   0;    //entfernt alle Einträge aus Tabelle weil per default alle gel Stunden auf 0 gesetzt werden
         
     }  
