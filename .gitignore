@@ -1,3 +1,5 @@
 /nbproject/private/
 db_access/common.php
 db_access/DB_DUMP.sql
+/mockup/
+/tests/
