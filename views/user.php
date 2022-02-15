@@ -100,8 +100,10 @@ echo ('<div class="container">
             if ($family->isSingle() )
             {   echo (' checked'); }
 echo (' onclick="bgQuery(\'' . "UPDATE" . '\', ' . ENCODED_T_FAM . ', \'' . F_FAM_SINGLE . '\', this, ' . $family->getFamID() . ')"><span class="slider"></span>
-        </p>
-            <br>
+        </p>');
+
+echo ('<p align="center">Die für Euch hinterlegten E-Mailadressen lauten: <strong>' . $family->getFamMail(1) . '</strong> sowie <b>' . $family->getFamMail(2) . '</b></p>');
+echo ('<br>
         <p>(Erläuterungen und Ausfüllhinweise siehe <a href="">unten</a>)</p>
         <br>');
 
