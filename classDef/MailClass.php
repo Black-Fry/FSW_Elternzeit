@@ -36,14 +36,21 @@ class MailClass
             geleistet. Danke f&uuml;r Euer Engagement!<br>
             Insgesamt m&uuml;sst Ihr ";
         
-        if ($this->famObj->isSingle ())
+        /* INITIAL - hier sind die Stati noch unbekannt in der DB  */
+        $this->text .= " 20 (alleinerziehend) bzw. 40 ";
+        
+        /*if ($this->famObj->isSingle ())
         {   $this->text .=  "" . PENSUM_SORGERECHT_ALLEIN . ""; }
         else
-        {   $this->text .=  "" . PENSUM_SORGERECHT_GEMEINSAM . ""; }
+        {   $this->text .=  "" . PENSUM_SORGERECHT_GEMEINSAM . ""; }*/
         
         $this->text .= " Stunden absolvieren.<br>
         Bitte denkt daran, dass nicht erf&uuml;lltes Pensum zum " . ABGABEDATUM . " in eine finanzielle Entsch&auml;digung<br>
             gegen&uuml;ber der FSW im Sinne der Schulgemeinschaft umgewandelt und berechnet wird.<br><br>";
+        
+        $this->text .= "Um die von Euch geleistete Arbeit geeignet zu dokumentieren, haben wir zuletzt mit Papierformularen gearbeitet.<br>
+        Wir m&ouml;chten mit Euch gemeinsam den n&auml;chsten Schritt in Richtung Digitalisierung gehen und haben deshalb eine Web-Oberfl&auml;che erarbeitet.<br>
+            Jede Familie erh&auml;lt eine personalisierte Ansicht. Eure Ansicht ist gegen den unbefugten Zugriff durch Dritte abgesichert.<br><br>";        
 
         $this->text .=  "In dem folgenden QR-Code (falls er nicht angezeigt wird, klickt im Mail-Programm auf 'Bilder herunterladen') ist Euer pers&ouml;nlicher, geheimer Link kodiert.<br>
             Druckt ihn Euch aus und h&auml;ngt ihn Euch an den K&uuml;hlschrank, dann k&ouml;nnt Ihr ihn nicht vergessen:<br>";

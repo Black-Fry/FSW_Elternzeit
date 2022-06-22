@@ -13,6 +13,9 @@ define ("T_EINSAETZE", "Tab_Einsaetze");
 define ("T_ADMIN_USER", "Tab_AdminUser");
 define ("T_EINSATZ_ZWECKE", "Tab_Einsatzzwecke");
 
+/*  SQL TEST Tab Names  */
+define ("T_FAM_TEST", "Tab_Familien_Test");
+
 /* Dekodierte SQL-Tabellennamen - werden per JS in .onChange() ausgetauscht und sollen nicht im Klartext sichtbar sein */
 define ("ENCODED_T_FAM", 1);
 define ("ENCODED_T_EINSAETZE", 2);
@@ -43,6 +46,10 @@ define ("Z_ZWECK_NAME", "ZweckNam");
 define ("ADMIN_VIEW", "ADMIN");
 define ("USER_VIEW", "USER");
 
+/*  HTML TEST Views */
+define ("ADMIN_TEST_VIEW", "ADMIN_TEST");
+
+
 /*  URL */
 // wichtig für potentiell umzüge: die URL wird auch im File callBgQueries.js noch einmal verwendet. dort steht sie hart im code 
 define ("ROOT_URL", "http://fsw.ossoelmi.berlin");
@@ -54,6 +61,10 @@ define ("USER_URL", ROOT_URL . "/views/user.php?cryurl=");
 define ("LOGOUT_URL", ROOT_URL . "/views/logout.php");
 define ("SEND_MAIL", ROOT_URL . "/mail/prepareAndSendMail.php");
 define ("GENERATE_QR", ROOT_URL . "/mail/generateQR.php?id=");
+
+/*  TEST-URLs   */
+define ("ADMIN_TEST_LOGIN_URL", ROOT_URL . "/views/adminLogin_test.php");
+define ("ADMIN_TEST_URL", ROOT_URL . "/views/admin_test.php");
 
 /* Konstanten   */
 define ("PENSUM_SORGERECHT_ALLEIN", 20);
