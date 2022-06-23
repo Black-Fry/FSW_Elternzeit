@@ -67,7 +67,7 @@ class MailClass
     
     function sendMail ()
     {   
-        $header = array('From'  => 'sekretariat@fsw.de',
+        $header = array('From'  => 'sekretariat@freie-schule-woltersdorf.de',
                 'charset'       => 'iso-8859-1',
                 'Content-type'  => 'text/html');
                 //'Reply-To' => 'webmaster@example.com',
