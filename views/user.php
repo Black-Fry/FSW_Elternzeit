@@ -116,6 +116,8 @@ readEinsaetzeFromDB($userHTMLTab, $family->getFamID());
 
 echo $userHTMLTab->returnHTML();
 
+echo ('Ihr wollt den Quellcode untersuchen oder das Projekt verbessern? F&uuml;hlt Euch herzlich dazu eingeladen, alles wurde ver&ouml;ffentlicht im <a href="https://github.com/Black-Fry/FSW_Elternzeit" target="_blank">GitHub</a>');
+
 //wird nur eingebelndet, wenn ein teXtfeld eine Änderung erfahren und anschließend das Feld den Fokus verloren hat
 echo ('<div id="snackbar">Änderung gespeichert!</div>');
 
