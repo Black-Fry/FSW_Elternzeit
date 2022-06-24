@@ -70,7 +70,7 @@ define ("ADMIN_TEST_URL", ROOT_URL . "/views/admin_test.php");
 define ("PENSUM_SORGERECHT_ALLEIN", 20);
 define ("PENSUM_SORGERECHT_GEMEINSAM", 40);
 define ("URL_SECRET_LENGTH", 16);
-define ("ABGABEDATUM", "01. 07. 2022");
+define ("ABGABEDATUM", "31. 07. 2022");
 
 function debug_to_console($data) 
 {
