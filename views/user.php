@@ -47,6 +47,13 @@ function readEinsaetzeFromDB($htmlTableObj, $_famID)
     $htmlTableObj->addFinalRow();
 }
 
+function generateExcelExportButton ()
+{        
+    $html   =   "<button onclick='exportUserTableToExcel(\"Export_FSW-Elternzeit_2021\")'>Exportiere nach Excel</button>";
+    
+    return $html;
+}
+
 
 //-------------------
 $family =   decodeFamilyFromURL ();
@@ -62,7 +69,6 @@ echo ('<!DOCTYPE html>
                 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
                 <link rel="stylesheet" href="../styles/userTabStyles.css">
-                
                 <link rel="stylesheet" href="../styles/datepicker.css">');
 
 //Tabellen right-sizing:
@@ -79,6 +85,7 @@ echo ('         <link rel="stylesheet" href="../styles/inputGlow.css">
                 <link rel="stylesheet" href="../styles/toggleSwitch.css">
                 <link rel="stylesheet" href="../styles/snackbar.css">
                 <script src="../js/callBgQueries.js"></script>
+                <script src="../js/exportTableToExcel.js"></script>  
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             </head>
             <body translate="no" >');
@@ -106,6 +113,9 @@ echo ('<p align="center">Die für Euch hinterlegten E-Mailadressen lauten: <stro
 echo ('<br>
         <!--<p>(Erläuterungen und Ausfüllhinweise siehe <a href="">unten</a>)</p>//-->
         <br>');
+echo ('<div style=text-align:center;>');
+echo generateExcelExportButton ();
+echo '</div><br>';
 
 
 $userHTMLTab   =   new HTMLUserTableClass($family);
