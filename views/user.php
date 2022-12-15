@@ -49,7 +49,7 @@ function readEinsaetzeFromDB($htmlTableObj, $_famID)
 
 function generateExcelExportButton ()
 {        
-    $html   =   "<button onclick='exportUserTableToExcel(\"Export_FSW-Elternzeit_2021\")'>Exportiere nach Excel</button>";
+    $html   =   "<button onclick='exportUserTableToExcel(\"Export_FSW-Elternzeit_2022\")'>Exportiere nach Excel</button>";
     
     return $html;
 }
@@ -93,7 +93,7 @@ echo ('         <link rel="stylesheet" href="../styles/inputGlow.css">
 //$family =   decodeFamilyFromURL ();
 
 echo ('<div class="container">
-        <p align="left">Arbeitsstundennachweis Schuljahr 2021/2022</p>
+        <p align="left">Arbeitsstundennachweis Schuljahr 2022/2023</p>
         <img src="../img/fswFavIcon.png" width="100"></img>
         <h2>FSW-Elternzeit - Elternansicht</h2>
         
