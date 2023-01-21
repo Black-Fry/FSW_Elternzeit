@@ -9,7 +9,7 @@ class TestClass
 {
     var $i;
     
-    function TestClass ()
+    function __construct ()
     {
         echo ("test");
     }

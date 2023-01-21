@@ -1,7 +1,7 @@
 <?php
 if (count(get_included_files()) == 1) define ('__MAIN__', __FILE__);
 
-include_once '../db_access/common.php';
+include_once 'db_access/common.php';
 
 /**
  * Description of DB_class

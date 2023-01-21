@@ -1,9 +1,9 @@
 <?php
 
-include '../db_access/common.php';
-include '../classDef/DBclass.php';
-include '../classDef/FamilyClass.php';
-include '../classDef/MailClass.php';
+include 'db_access/common.php';
+include 'classDef/DBclass.php';
+include 'classDef/FamilyClass.php';
+include 'classDef/MailClass.php';
 
 //------------------------------------------------------------
 

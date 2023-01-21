@@ -1,10 +1,14 @@
 <?php
 
-/*  define DB-Access data    */
-define ("DB_HOST", "your_db-host_here");
-define ("DB_USERNAME", "your_db-username_here");
-define ("DB_PASSWORD", "your_db-password_here");
-define ("DB_NAME", "your_db-name_here");
+///*  define DB-Access data    */
+//const DB_HOST = "your_db-host_here";
+//const DB_USERNAME = "your_db-username_here";
+//const DB_PASSWORD = "your_db-password_here";
+//const DB_NAME = "your_db-name_here";
+const DB_HOST = "rdbms.strato.de";
+const DB_USERNAME = "dbu783084";
+const DB_PASSWORD = "65d01c3d97c81ef2";
+const DB_NAME = "dbs5269035";
 
 /*  SQL-Tab-Names    */	
 define ("T_FAM", "Tab_Familien");
@@ -31,7 +35,7 @@ define ("F_FAM_SINGLE", "Single");
 define ("F_FAM_MAIL_ONE", "FamMailOne");
 define ("F_FAM_MAIL_TWO", "FamMailTwo");
 define ("E_EINSATZ_ID", "EinsatzID");
-define ("E_EINSATZ_FAM_ID", F_FAM_ID);
+const E_EINSATZ_FAM_ID = F_FAM_ID;
 define ("E_EINSATZ_ZWECK_ID", "ZweckID");
 define ("E_EINSATZ_EINSATZ_DATE", "EinsatzDate");
 define ("E_EINSATZ_LENGTH", "EinsatzLength");
@@ -54,7 +58,7 @@ define ("ADMIN_TEST_VIEW", "ADMIN_TEST");
 
 /*  URL */
 // wichtig für potentiell umzüge: die URL wird auch im File callBgQueries.js noch einmal verwendet. dort steht sie hart im code 
-define ("ROOT_URL", "http://fsw.ossoelmi.berlin");
+define ("ROOT_URL", "http://localhost:63342/FSW_Elternzeit/");
 define ("DB_ACCESS_URL", ROOT_URL . "/db_acess");
 define ("BG_QUERY_URL", DB_ACCESS_URL . "bgQueries.php");
 define ("ADMIN_LOGIN_URL", ROOT_URL . "/views/adminLogin.php");

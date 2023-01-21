@@ -16,36 +16,35 @@ class FamilyClass
     var $lastUserEdit;
     var $geleisteteStunden;
     
-    function FamilyClass ($_dbRow)
-    {	   
-        //print_r($_dbRow);
-        if ($_dbRow[FamID])
-        {   $this->FamID        =   $_dbRow[FamID]; }
+    function __construct ($_dbRow)
+    {
+        if ($_dbRow["FamID"])
+        {   $this->FamID        =   $_dbRow["FamID"]; }
         else
         {   $this->FamID        =   ""; }
 
-        if ($_dbRow[FamNam])
-        {   $this->FamNam        =   $_dbRow[FamNam]; }
+        if ($_dbRow["FamNam"])
+        {   $this->FamNam        =   $_dbRow["FamNam"]; }
         else
-        {   $this->FamNam        =   ""; }        
+        {   $this->FamNam        =   ""; }
         
-        if ($_dbRow[CryptURL])
-        {   $this->CryptURL      =   $_dbRow[CryptURL]; }
+        if ($_dbRow["CryptURL"])
+        {   $this->CryptURL      =   $_dbRow["CryptURL"]; }
         else
         {   $this->CryptURL      =   ""; }
         
-        if ($_dbRow[Single])
-        {   $this->Single        =   $_dbRow[Single]; }
+        if ($_dbRow["Single"])
+        {   $this->Single        =   $_dbRow["Single"]; }
         else
         {   $this->Single        =   FALSE; }
         
-        if ($_dbRow[FamMailOne])
-        {   $this->FamMailOne    =   $_dbRow[FamMailOne]; }
+        if ($_dbRow["FamMailOne"])
+        {   $this->FamMailOne    =   $_dbRow["FamMailOne"]; }
         else
         {   $this->FamMailOne    =   ""; }
 
-        if ($_dbRow[FamMailTwo])
-        {   $this->FamMailTwo    =   $_dbRow[FamMailTwo]; }
+        if ($_dbRow["FamMailTwo"])
+        {   $this->FamMailTwo    =   $_dbRow["FamMailTwo"]; }
         else
         {   $this->FamMailTwo    =   ""; }        
         
@@ -80,7 +79,9 @@ class FamilyClass
     }
     
     function getFamID ()
-    {   return $this->FamID;    }
+    {
+//        error_log("ok:". $this->FamID);
+        return $this->FamID;    }
     
     function getFamNam ()
     {   return $this->FamNam;    }
@@ -117,11 +118,11 @@ class FamilyClass
         {   
             if (0 == $lastUserEdit)
             {
-                $this->lastUserEdit =   $singleEinsatz[TimeStamp];
+                $this->lastUserEdit =   $singleEinsatz["TimeStamp"];
                 $lastUserEdit       =   1;
             }
             //echo $singleEinsatz[EinsatzLength] . " ";
-            $this->geleisteteStunden    +=   $singleEinsatz[EinsatzLength];    
+            $this->geleisteteStunden    +=   $singleEinsatz["EinsatzLength"];
         }
         
     }

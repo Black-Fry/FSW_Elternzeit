@@ -1,9 +1,10 @@
 <?php
 
-include '../classDef/DBclass.php';
-include '../classDef/FamilyClass.php';
-include '../classDef/EinsatzClass.php';
-include '../classDef/HTMLTableClass.php';
+chdir($_SERVER['DOCUMENT_ROOT']);
+include_once 'classDef/DBclass.php';
+include_once 'classDef/FamilyClass.php';
+include_once 'classDef/EinsatzClass.php';
+include_once 'classDef/HTMLTableClass.php';
 
 
 function decodeFamilyFromURL ()

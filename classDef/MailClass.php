@@ -1,8 +1,8 @@
 <?php
 
-//include '../db_access/common.php';        //error if incl
-include './DBclass.php';
-include './FamilyClass.php';
+//include 'db_access/common.php';        //error if incl
+include 'classDef/DBclass.php';
+include_once 'classDef/FamilyClass.php';
 
 
 class MailClass 
@@ -11,7 +11,7 @@ class MailClass
     var $subject;
     var $text;
     
-    function MailClass ($_famID)
+    function __construct ($_famID)
     {
         $this->initFamObj($_famID);
         $this->subject  =   "FSW Elternstunden Erinnerungsmail";

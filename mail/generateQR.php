@@ -1,6 +1,6 @@
 <?php
 
-    include ('../phpqrcode/qrlib.php');
+    include ('phpqrcode/qrlib.php');
         
     $param = $_GET['id']; // remember to sanitize that - it is user input!
     

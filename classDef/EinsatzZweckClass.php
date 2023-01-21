@@ -1,6 +1,6 @@
 <?php
 
-include_once './DBclass.php';
+include_once 'classDef/DBclass.php';
 
 /**
  * Description of EinsatzZweckeClass
@@ -12,7 +12,7 @@ class EinsatzZweckClass
     public $zweckID;
     public $zweckNam;
     
-    function EinsatzZweckClass ($_id)
+    function __construct ($_id)
     {
         $this->zweckID  =$_id;
         $this->resolveZweckNam();
