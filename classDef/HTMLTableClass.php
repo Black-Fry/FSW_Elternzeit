@@ -1,8 +1,8 @@
 <?php
 
-include './FamilyClass.php';
-include_once './EinsatzZweckClass.php';
-include_once './DBclass.php';
+include_once 'classDef/FamilyClass.php';
+include_once 'classDef/EinsatzZweckClass.php';
+include_once 'classDef/DBclass.php';
 
 
 /**
@@ -15,7 +15,7 @@ abstract class HTMLTableClass
     public $view;      //user or admin
     public $htmlString;
 
-    function HTMLTableClass ()
+    function __construct ()
     {	   }   
     
     public function echoWhoAmI ()
@@ -42,17 +42,16 @@ abstract class HTMLTableClass
 class HTMLAdminTableClass extends HTMLTableClass
 {
 
-    public function HTMLAdminTableClass ()
+    public function __construct ()
     {   
-        //echo ("HTMLAdminTableClass ()");
+//        echo ("HTMLAdminTableClass ()");
         $this->view    =   ADMIN_VIEW; 
         $this->initTable();
     }
     
     public function initTable ()
     {
-        $this->htmlString   =   "";
-        $this->htmlString   .=   '<table id="adminTable" width="90%" class="sortierbar dezimalpunkt">';
+        $this->htmlString   =   '<table id="adminTable" width="90%" class="sortierbar dezimalpunkt">';
         
         $this->createHeader();
     }
@@ -83,7 +82,8 @@ class HTMLAdminTableClass extends HTMLTableClass
     {
         $pensum;
         $jsID = $_valueObj->getFamID();
-        //echo $jsID;
+//        error_log("id: ".$jsID);
+//        echo $jsID;
         $this->htmlString   .=     '<tr>';
        
         /*
@@ -174,7 +174,8 @@ class HTMLAdminTableClass extends HTMLTableClass
     }
     
     public function returnHTML ()
-    {   
+    {
+//        debug_to_console($this->htmlString);
         $this->finishTable();
         return $this->htmlString;   
     }
@@ -185,7 +186,7 @@ class HTMLUserTableClass extends HTMLTableClass
 {
     public $myFamily;
 
-    public function HTMLUserTableClass ($_myFamily)
+    public function __construct ($_myFamily)
     {   
         $this->myFamily =   $_myFamily;   
         $this->view     =   USER_VIEW;

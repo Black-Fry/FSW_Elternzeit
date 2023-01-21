@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8080:80"
+  db:
+    hostname: "rdbms.strato.de"
+    image: mysql
+    volumes:
+      - ./db_access:/docker-entrypoint-initdb.d/
+    environment:
+      MYSQL_ROOT_PASSWORD: "istdochegal"
+      MYSQL_USER: "dbu783084"
+      MYSQL_PASSWORD: "65d01c3d97c81ef2"
+      MYSQL_DATABASE: "dbs5269035"
+    ports:
+      - "3306:3306"

@@ -1,15 +1,14 @@
 <?php
 
-include_once '../db_access/connection_helper.php'; 
+chdir($_SERVER['DOCUMENT_ROOT']);
+include_once 'db_access/connection_helper.php';
 
 
 $user       =   "user_input";
 $pw         =   "pw_input";
 $login_btn  =   "login_btn";
 
-
 session_start();    /* MUSS AUF ALLEN SEITEN STEHEN - UEBERALL ALS ERSTER BEFEHL !! */
-
 /*
 function newUserRegistered ()
 {
@@ -26,7 +25,7 @@ if (isset($_POST[$login_btn]))
     //debug_to_console ($userid);
     if ($userid!=false) 
     {   login($userid); }
-    else 
+    else
     {   echo "<p class='na'>Deine Anmeldedaten waren nicht korrekt! (user: $_POST[$user])</p><hr>";  }
 }
 

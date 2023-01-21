@@ -1,9 +1,10 @@
 <?php
 
-include '../classDef/DBclass.php';
-include '../classDef/FamilyClass.php';
-include '../classDef/HTMLTableClass.php';
-include_once '../db_access/connection_helper.php';
+chdir($_SERVER['DOCUMENT_ROOT']);
+include 'classDef/DBclass.php';
+include 'classDef/FamilyClass.php';
+include 'classDef/HTMLTableClass.php';
+include_once 'db_access/connection_helper.php';
 
 function generateExcelExportButton ()
 {        
@@ -11,7 +12,6 @@ function generateExcelExportButton ()
     
     return $html;
 }
-
 
 function readFamiliesFromDB($htmlTableObj)
 {       
@@ -32,6 +32,8 @@ function readFamiliesFromDB($htmlTableObj)
 
 
 //------------------------ Funktionsaufrufe
+//do not use any js/css files from cache.
+session_cache_limiter('nocache');
 
 session_start();    /* MUSS AUF ALLEN SEITEN STEHEN - UEBERALL ALS ERSTER BEFEHL !! */
 $loginResult    = logged_in();
@@ -39,8 +41,6 @@ $loginResult    = logged_in();
 if (! $loginResult) 
 {   header('Location: ' . ADMIN_LOGIN_URL); }
 
-//do not use any js/css files from cache.
-session_cache_limiter('nocache');
 
 
 //html page inits

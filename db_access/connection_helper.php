@@ -1,7 +1,7 @@
 <?php
 
-include_once './common.php';
-include_once '../classDef/DBclass.php';
+include_once 'db_access/common.php';
+include_once 'classDef/DBclass.php';
 
 function check_user($name, $pass) 
 { 
@@ -37,7 +37,7 @@ function logged_in()
             .   " WHERE " . U_USER_SESSION . "='" . session_id() . "' LIMIT 1";
 
     //$result=mysql_query($sql); 
-    //debug_to_console($sql);
+    // debug_to_console($sql);
     $result =   DBclass::query($sql)->all();
     //debug_to_console(print_r($result));
     $userID =   $result[0][U_USER_ID];

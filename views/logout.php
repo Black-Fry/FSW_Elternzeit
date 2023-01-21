@@ -1,8 +1,9 @@
-<?php 
+<?php
+    chdir($_SERVER['DOCUMENT_ROOT']);
     session_start(); 
 
-    include_once '../db_access/common.php'; 
-    include_once '../db_access/connection_helper.php';
+    include_once 'db_access/common.php';
+    include_once 'db_access/connection_helper.php';
     
 
     $htmlHeader = "<html><head><title>FSW Elternzeit - Logout</title>"

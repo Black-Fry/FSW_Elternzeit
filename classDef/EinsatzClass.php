@@ -1,6 +1,7 @@
 <?php
 
-include_once './DBclass.php';
+
+include_once 'classDef/DBclass.php';
 
 /**
  * Description of EinsatzClass
@@ -17,7 +18,7 @@ class EinsatzClass
     var $editDate;      //timestamp
     var $comment;
     
-    function EinsatzClass ($_dbRow)
+    function __construct ($_dbRow)
     {	   
         //print_r($_dbRow);
         if ($_dbRow[E_EINSATZ_ID])

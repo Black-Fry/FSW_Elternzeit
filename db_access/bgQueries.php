@@ -2,7 +2,8 @@
 
 /* diese Site ist nur dazu da, im Hintergrund SQL-Änderungen durchzuführen und enthält keinerlei "visibles" */
 
-include '../classDef/DBclass.php';
+chdir($_SERVER['DOCUMENT_ROOT']);
+include 'classDef/DBclass.php';
 
 //scheint fehler zu produzieren
 function generateUpdateStatement ($_cryptoTabNam, $_fieldToBeUpdated, $_newValue, $_id)

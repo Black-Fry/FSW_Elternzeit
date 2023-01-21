@@ -1,7 +1,7 @@
 <?php
 
 
-include '../phpqrcode/qrlib.php';
+include 'phpqrcode/qrlib.php';
 
 header("Content-type: image/png");
 $string = "text";
