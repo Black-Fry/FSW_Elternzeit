@@ -42,8 +42,10 @@ https://www.w3schools.com/howto/howto_css_switch.asp
 //snackbar
 https://www.w3schools.com/howto/howto_js_snackbar.asp
 
-## To-Do ideas
+## To-Do
 
-- Composer instead of custom dependency handling
+- Composer instead of custom dependency handling?
 - Remove hard coded base URLs (common.php `ROOT_URL`, callBgQueries.js `url`) / replace by environment
-- Automated unit tests
+- Automated unit tests?
+- use Psalm to find bugs?
+- Add microsoft calendar integration for absence info
