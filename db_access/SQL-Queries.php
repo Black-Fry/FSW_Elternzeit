@@ -1,6 +1,6 @@
 <?php
 
-# generate Zufallsstirng
+# generate Zufallsstring
 # SELECT MD5(RAND()) AS checksumResult;
 
 //new (empty) column into FamilyTab. php generates CryptoURL-String
