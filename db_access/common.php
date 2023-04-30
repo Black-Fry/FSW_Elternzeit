@@ -10,14 +10,14 @@ const DB_USERNAME = "dbu783084";
 const DB_PASSWORD = "65d01c3d97c81ef2";
 const DB_NAME = "dbs5269035";
 
-/*  SQL-Tab-Names    */	
-define ("T_FAM", "Tab_Familien");
-    define ("T_FAM_2022", "Tab_Familien_2022");
-define ("T_EINSAETZE", "Tab_Einsaetze");
-    define ("T_EINSAETZE_2022", "Tab_Einsaetze_2022");
-define ("T_ADMIN_USER", "Tab_AdminUser");
-define ("T_EINSATZ_ZWECKE", "Tab_Einsatzzwecke");
-    define ("T_EINSATZ_ZWECKE_2022", "Tab_Einsatzzwecke_2022");
+/*  SQL-Tab-Names    */
+const T_FAM = "Tab_Familien";
+const T_FAM_2022 = "Tab_Familien_2022";
+const T_EINSAETZE = "Tab_Einsaetze";
+const T_EINSAETZE_2022 = "Tab_Einsaetze_2022";
+const T_ADMIN_USER = "Tab_AdminUser";
+const T_EINSATZ_ZWECKE = "Tab_Einsatzzwecke";
+const T_EINSATZ_ZWECKE_2022 = "Tab_Einsatzzwecke_2022";
 
 /*  SQL TEST Tab Names  */
 define ("T_FAM_TEST", "Tab_Familien_Test");
