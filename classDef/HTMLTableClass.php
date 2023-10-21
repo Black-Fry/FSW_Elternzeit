@@ -91,7 +91,7 @@ class HTMLAdminTableClass extends HTMLTableClass
          *  welche Zeilen gelöscht werden dürfen auf Buton-Druck (nur wenn gelStunden != 0)
          */
         $this->htmlString   .=  '<td>'
-                            .   '   <input type="checkbox" id="check_' . $jsID . '_' . $_valueObj->returnGeleisteteStunden() .' " name="check_' . $jsID . '" >'
+                            .   '   <input type="checkbox" id="check_' . $jsID . '_' . $_valueObj->returnGeleisteteStunden() .'" name="check_' . $jsID . '" >'
                             .   '</td>';
         //<div class="col col-1" data-label="ID_Fam">1</div>
         $this->htmlString   .=  '<td>'
@@ -100,7 +100,7 @@ class HTMLAdminTableClass extends HTMLTableClass
         //<div class="col col-3" data-label="CryptoID">j7gdMH95hu7CZLss</div>
         $this->htmlString   .=  '<td align="center">'
                             .       '<label class="switch">
-                                        <input type="checkbox" id="single_' . $jsID . ' name="single_' . $jsID;
+                                        <input type="checkbox" id="single_' . $jsID . '" name="single_' . $jsID . '"';
         //aktiviere Checkbox, wenn FamObj == alleinerziehend
         if ($_valueObj->isSingle() )
         {   $this->htmlString .=  ' checked'; }
