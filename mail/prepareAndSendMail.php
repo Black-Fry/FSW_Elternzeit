@@ -1,9 +1,10 @@
 <?php
 
-include 'db_access/common.php';
-include 'classDef/DBclass.php';
-include 'classDef/FamilyClass.php';
-include 'classDef/MailClass.php';
+//chdir($_SERVER['DOCUMENT_ROOT']);
+include '../db_access/common.php';
+include '../classDef/DBclass.php';
+include '../classDef/FamilyClass.php';
+include '../classDef/MailClass.php';
 
 //------------------------------------------------------------
 
