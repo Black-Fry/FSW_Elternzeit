@@ -104,6 +104,16 @@ function gatherAllCheckedRows(_alarm, _countFamIDs, _countHours)
     {
         var idString = String(checkedFields.item(i).id);
         
+        //diese Kombi von Params soll in der Admin-Uebersicht alle ausgewaehlten Eltern ausgeben
+        if ( (true === _countFamIDs) && (false === _countHours) )
+        {
+            if ( idString.includes("check_") )
+            {
+                const stringSplit   = idString.split('_');
+                paramArray.push(parseInt(stringSplit[1])); 
+            }
+        }
+
         //(1) es gibt ein weiteres Checkbox-Element: "Alleinstehend" (single). Das brauchen wir hier nicht
         //(2) und es gibt die CheckBox "checkAllBoxes" Feld aus Admin-View. Wird auch nicht benoetigt
         if ( idString.includes("single") || idString.includes("tickAll") )
@@ -125,11 +135,6 @@ function gatherAllCheckedRows(_alarm, _countFamIDs, _countHours)
                 zeroHourWatchDog    =   true;   
                 //console.log(stringSplit[1] + " sets watchDog = true" + ", geleisteteStunden = " + geleisteteStunden);
             }
-        }
-        else if ( (true === _countFamIDs) && (false === _countHours) )
-        {
-            const stringSplit   = idString.split('_');
-            paramArray.push(parseInt(stringSplit[1])); 
         }
     }
     
@@ -172,7 +177,7 @@ function prepareMails()
     countFamIDs =   true;       //brauchen wir hier
     countHours  =   false;      //das wollen wir nicht
     famIDs      =   JSON.stringify(gatherAllCheckedRows(alarm, countFamIDs, countHours));
-    //console.info(famIDs);
+    console.info(famIDs);
     
     jQuery.ajax(
     {
