@@ -68,8 +68,8 @@ class MailClass
         
         $this->text =   "Hallo liebe Familie " . $this->famObj->getFamNam () . ",<br><br>
             
-        In den vergangenen Monaten habt Ihr mit gro&szlig;er Sorgfalt Eure geleisteten Elternstunden &uuml;ber das <br>
-        neue Portal gepflegt. Damit habt Ihr uns super unterst&uuml;tzt, denn ein sehr gro&szlig;er Berg manueller <br>
+        Im vergangenen Schuljahr haben die FSW-Eltern mit gro&szlig;er Sorgfalt ihre geleisteten Elternstunden &uuml;ber das <br>
+        Elternzeit-Portal gepflegt. Damit habt Ihr uns super unterst&uuml;tzt, denn ein sehr gro&szlig;er Berg manueller <br>
         Arbeit (Zettel einsammeln & nachhaken, manueller &Uuml;bertrag ins System, Auswerten etc.) ist uns <br>
         dadurch erspart geblieben - Danke!<br><br>
         Nun l&auml;uft das aktuelle Schuljahr schon seit einiger Zeit und viele von Euch sind schon wieder sehr <br>
@@ -91,12 +91,12 @@ class MailClass
         
         $this->text .=  '<img src="http://fsw.ossoelmi.berlin/img/screenshot_export.png"></img><br>';
         
-        $this->text .= "Ihr habt nun <b>ab dem kommenden Mittwoch (16. November 2022) einige Tage Zeit, um Eure Eingaben<br>
-            zu exportieren</b>. Am <b>Sonntag, dem 27. November</b> werden wir das Portal f&uuml;r wenige Minuten vom <br>
+        $this->text .= "Ihr habt nun <b>bis einschlie&szlig;lich Sonntag (22. Oktober 2023) etwas Zeit, um Eure Eingaben<br>
+            zu exportieren</b>. Am <b>Montag, dem 23. Oktober</b> werden wir das Portal f&uuml;r wenige Minuten vom <br>
             Netz nehmen, <b>alle dort gespeicherten Daten l&ouml;schen</b> und das Ganze neu aufsetzen. Anschlie&szlig;end<br>
             erhaltet Ihr wieder eine Einladungsmail samt pers&ouml;nlichem Zugang zu Eurer pers&ouml;nlichen<br>
             Portalseite, auf der Ihr Eure Elternstunden im aktuellen Schuljahr pflegen k&ouml;nnt. <br><br>
-            <u>Bitte beachten:</u> <b>nach dem 27. November wird Euer pers&ouml;nlicher Zugang neu generiert. QR-Codes<br>
+            <u>Bitte beachten:</u> <b>am 23. Oktober wird Euer pers&ouml;nlicher Zugang neu generiert. QR-Codes<br>
             und Links aus dem vorhergehenden Schuljahr werden dann nicht mehr funktionieren.</b><br><br>
             Noch Fragen?<br><br>
             Viele Gr&uuml;&szlig;e,<br>
