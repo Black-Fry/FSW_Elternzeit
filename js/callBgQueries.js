@@ -49,7 +49,7 @@ function bgQuery(_sqlCmd, _cryptoTab, _fieldnam, _newValue, _id)
     jQuery.ajax(
     {
         type: "POST",
-        url: "http://localhost:63342/FSW_Elternzeit/db_access/bgQueries.php",
+        url: "http://fsw.ossoelmi.berlin/db_access/bgQueries.php",
         dataType: 'json',
         //arguments: cryptnoTabNam, fieldNam, newValue, id
         //data: {functionname: arguments[0], arguments: [arguments[1], fieldnam, newValue, id]},
