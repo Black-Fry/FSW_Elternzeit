@@ -27,6 +27,7 @@ class MailClass
         $this->famObj   =   new FamilyClass($dbRow[0]);
     }
     
+//      Erinnerung zum Schuljahresende: bitte aktualisiert Eure Einträge    
 //    function setText ()
 //    {
 //        $link = USER_URL . $this->famObj->getCryptoSecret ();
@@ -62,45 +63,70 @@ class MailClass
 //        $this->text .=  "<br>Viele Gr&uuml;&szlig;e,<br> Euer Sekretariat der FSW";
 //    }
  
+    //Warnung - bald wird die DB geleert
+//    function setText ()
+//    {
+//        $link = USER_URL . $this->famObj->getCryptoSecret ();
+//        
+//        $this->text =   "Hallo liebe Familie " . $this->famObj->getFamNam () . ",<br><br>
+//            
+//        Im vergangenen Schuljahr haben die FSW-Eltern mit gro&szlig;er Sorgfalt ihre geleisteten Elternstunden &uuml;ber das <br>
+//        Elternzeit-Portal gepflegt. Damit habt Ihr uns super unterst&uuml;tzt, denn ein sehr gro&szlig;er Berg manueller <br>
+//        Arbeit (Zettel einsammeln & nachhaken, manueller &Uuml;bertrag ins System, Auswerten etc.) ist uns <br>
+//        dadurch erspart geblieben - Danke!<br><br>
+//        Nun l&auml;uft das aktuelle Schuljahr schon seit einiger Zeit und viele von Euch sind schon wieder sehr <br>
+//        emsig und unterst&uuml;tzen die Schulgemeinschaft durch diverse Elternstunden. Nat&uuml;rlich m&ouml;chten wir <br>
+//        das Portal vom letzten Jahr auch in diesem Jahr wieder verwenden. <br><br>
+//        Dazu braucht es allerdings einen Tabula Rasa- Durchgang. <b>Wir werden alle Eure Eingaben l&ouml;schen</b> <br>
+//        und mit einem 'neuen Gewissen' starten. Warum? Ganz einfach deshalb, weil wir verantwortlich mit <br>
+//        Euren Daten umgehen und nichts speichern wollen, was nicht ben&ouml;tigt wird.<br><br>
+//        Ihr sollt aber die Chance bekommen, Eure Eingaben aus dem vergangenen Schuljahr zu speichern. <br>
+//        Damit Ihr das tun k&ouml;nnt, &ouml;ffnet doch einmal Eure pers&ouml;nliche Portalseite &uuml;ber den QR-Code:<br>";
+//        
+//        $this->text .=  '<img src="' . GENERATE_QR . $link . '" />';
+//
+//        $this->text .= '<br>oder Euren pers&ouml;nlichen Link: <a href=' . $link . '>' . $link . '</a> .<br>';
+//
+//        $this->text .= 'Wir haben dort eine <b>Export-Funktion</b> eingearbeitet, mit der Ihr Euren gesamten Datensatz ins<br>
+//            Tabellenkalkulations-Werkzeug Eurer Wahl &uuml;bertragen k&ouml;nnt. Ihr solltet direkt &uuml;ber der Tabelle<br>
+//            diese, hier rot umrandete, Schaltfl&auml;che sehen:<br>';
+//        
+//        $this->text .=  '<img src="http://fsw.ossoelmi.berlin/img/screenshot_export.png"></img><br>';
+//        
+//        $this->text .= "Ihr habt nun <b>bis einschlie&szlig;lich Sonntag (22. Oktober 2023) etwas Zeit, um Eure Eingaben<br>
+//            zu exportieren</b>. Am <b>Montag, dem 23. Oktober</b> werden wir das Portal f&uuml;r wenige Minuten vom <br>
+//            Netz nehmen, <b>alle dort gespeicherten Daten l&ouml;schen</b> und das Ganze neu aufsetzen. Anschlie&szlig;end<br>
+//            erhaltet Ihr wieder eine Einladungsmail samt pers&ouml;nlichem Zugang zu Eurer pers&ouml;nlichen<br>
+//            Portalseite, auf der Ihr Eure Elternstunden im aktuellen Schuljahr pflegen k&ouml;nnt. <br><br>
+//            <u>Bitte beachten:</u> <b>am 23. Oktober wird Euer pers&ouml;nlicher Zugang neu generiert. QR-Codes<br>
+//            und Links aus dem vorhergehenden Schuljahr werden dann nicht mehr funktionieren.</b><br><br>
+//            Noch Fragen?<br><br>
+//            Viele Gr&uuml;&szlig;e,<br>
+//            Euer Sekretariat & der AK IT";
+//    }
+ 
+//  nach Tabula Rase: DB wird neu aufgesetzt
     function setText ()
     {
         $link = USER_URL . $this->famObj->getCryptoSecret ();
         
         $this->text =   "Hallo liebe Familie " . $this->famObj->getFamNam () . ",<br><br>
             
-        Im vergangenen Schuljahr haben die FSW-Eltern mit gro&szlig;er Sorgfalt ihre geleisteten Elternstunden &uuml;ber das <br>
-        Elternzeit-Portal gepflegt. Damit habt Ihr uns super unterst&uuml;tzt, denn ein sehr gro&szlig;er Berg manueller <br>
-        Arbeit (Zettel einsammeln & nachhaken, manueller &Uuml;bertrag ins System, Auswerten etc.) ist uns <br>
-        dadurch erspart geblieben - Danke!<br><br>
+        Dies ist Euer Zugang zum FSW-Elternzeit-Portal.<br>
+        Durch die digitale Verarbeitung &uuml;ber dieses Web-Portal bleibt dem FSW-Sekretariat ein sehr gro&szlig;er Berg manueller <br>
+        Arbeit (Zettel einsammeln & nachhaken, manueller &Uuml;bertrag ins System, Auswerten etc.) erspart - Danke f&uuml;r Eure Unterst&uuml;tzung! <br><br>
         Nun l&auml;uft das aktuelle Schuljahr schon seit einiger Zeit und viele von Euch sind schon wieder sehr <br>
-        emsig und unterst&uuml;tzen die Schulgemeinschaft durch diverse Elternstunden. Nat&uuml;rlich m&ouml;chten wir <br>
-        das Portal vom letzten Jahr auch in diesem Jahr wieder verwenden. <br><br>
-        Dazu braucht es allerdings einen Tabula Rasa- Durchgang. <b>Wir werden alle Eure Eingaben l&ouml;schen</b> <br>
-        und mit einem 'neuen Gewissen' starten. Warum? Ganz einfach deshalb, weil wir verantwortlich mit <br>
-        Euren Daten umgehen und nichts speichern wollen, was nicht ben&ouml;tigt wird.<br><br>
-        Ihr sollt aber die Chance bekommen, Eure Eingaben aus dem vergangenen Schuljahr zu speichern. <br>
-        Damit Ihr das tun k&ouml;nnt, &ouml;ffnet doch einmal Eure pers&ouml;nliche Portalseite &uuml;ber den QR-Code:<br>";
+        emsig und unterst&uuml;tzen die Schulgemeinschaft durch diverse Elternstunden. <br><br>
+        Damit Ihr Eure geleisteten Stunden im Portal pflegen k&ouml;nnt, &ouml;ffnet Eure pers&ouml;nliche Portalseite &uuml;ber diesen personalisierten QR-Code:<br>";
         
         $this->text .=  '<img src="' . GENERATE_QR . $link . '" />';
 
         $this->text .= '<br>oder Euren pers&ouml;nlichen Link: <a href=' . $link . '>' . $link . '</a> .<br>';
-
-        $this->text .= 'Wir haben dort eine <b>Export-Funktion</b> eingearbeitet, mit der Ihr Euren gesamten Datensatz ins<br>
-            Tabellenkalkulations-Werkzeug Eurer Wahl &uuml;bertragen k&ouml;nnt. Ihr solltet direkt &uuml;ber der Tabelle<br>
-            diese, hier rot umrandete, Schaltfl&auml;che sehen:<br>';
-        
-        $this->text .=  '<img src="http://fsw.ossoelmi.berlin/img/screenshot_export.png"></img><br>';
-        
-        $this->text .= "Ihr habt nun <b>bis einschlie&szlig;lich Sonntag (22. Oktober 2023) etwas Zeit, um Eure Eingaben<br>
-            zu exportieren</b>. Am <b>Montag, dem 23. Oktober</b> werden wir das Portal f&uuml;r wenige Minuten vom <br>
-            Netz nehmen, <b>alle dort gespeicherten Daten l&ouml;schen</b> und das Ganze neu aufsetzen. Anschlie&szlig;end<br>
-            erhaltet Ihr wieder eine Einladungsmail samt pers&ouml;nlichem Zugang zu Eurer pers&ouml;nlichen<br>
-            Portalseite, auf der Ihr Eure Elternstunden im aktuellen Schuljahr pflegen k&ouml;nnt. <br><br>
-            <u>Bitte beachten:</u> <b>am 23. Oktober wird Euer pers&ouml;nlicher Zugang neu generiert. QR-Codes<br>
-            und Links aus dem vorhergehenden Schuljahr werden dann nicht mehr funktionieren.</b><br><br>
+       
+        $this->text .= "<br><br>
             Noch Fragen?<br><br>
             Viele Gr&uuml;&szlig;e,<br>
-            Euer Sekretariat & der AK IT";
+            Euer Sekretariat & der AK IT & das Portalteam (Jonas & Micha)";
     }
 
     
