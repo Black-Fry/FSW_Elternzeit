@@ -94,7 +94,7 @@ echo ('         <link rel="stylesheet" href="../styles/inputGlow.css">
 //$family =   decodeFamilyFromURL ();
 
 echo ('<div class="container">
-        <p align="left">Arbeitsstundennachweis Schuljahr 2022/2023</p>
+        <p align="left">Arbeitsstundennachweis Schuljahr 2023/2024</p>
         <img src="../img/fswFavIcon.png" width="100"></img>
         <h2>FSW-Elternzeit - Elternansicht</h2>
         
